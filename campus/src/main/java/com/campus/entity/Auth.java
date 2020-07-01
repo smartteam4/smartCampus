@@ -26,16 +26,26 @@ public class Auth {
 	 * 开启选课
 	 */
 	private Boolean elective;
+	/**
+	 * 开启学生素质评价
+	 */
+	private Boolean stuQuality;
+	/**
+	 * 开启教师评价
+	 */
+	private Boolean tchEvaluation;
 	
 	public Auth() {
 		super();
 	}
 
-	public Auth(String id, Boolean score, Boolean elective) {
+	public Auth(String id, Boolean score, Boolean elective, Boolean stuQuality, Boolean tchEvaluation) {
 		super();
 		this.id = id;
 		this.score = score;
 		this.elective = elective;
+		this.stuQuality = stuQuality;
+		this.tchEvaluation = tchEvaluation;
 	}
 
 	public String getId() {
@@ -62,8 +72,26 @@ public class Auth {
 		this.elective = elective;
 	}
 
+	public Boolean getStuQuality() {
+		return stuQuality;
+	}
+
+	public void setStuQuality(Boolean stuQuality) {
+		this.stuQuality = stuQuality;
+	}
+
+	public Boolean getTchEvaluation() {
+		return tchEvaluation;
+	}
+
+	public void setTchEvaluation(Boolean tchEvaluation) {
+		this.tchEvaluation = tchEvaluation;
+	}
+
 	@Override
 	public String toString() {
-		return "Auth [id=" + id + ", score=" + score + ", elective=" + elective + "]";
+		return "Auth [id=" + id + ", score=" + score + ", elective=" + elective + ", stuQuality=" + stuQuality
+				+ ", tchEvaluation=" + tchEvaluation + "]";
 	}
+
 }

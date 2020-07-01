@@ -15,14 +15,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Student {
 	/**
-	 * 逻辑主键
+	 * 学号、逻辑主键
 	 */
 	@Id
 	private String id;
-	/**
-	 * 学号
-	 */
-	private String stuId;
 	/**
 	 * 姓名
 	 */
@@ -85,12 +81,11 @@ public class Student {
 	public Student() {
 		super();
 	}
-	public Student(String id, String stuId, String name, String sex, String idCard, String nation,
+	public Student(String id, String name, String sex, String idCard, String nation,
 			String politicalStatus, Date birthday, String phone, String email, Integer stuYear, String trainingLevel,
 			String inSchool, Date admissionDate, String schoolStatus, ClassRelation classRelation) {
 		super();
 		this.id = id;
-		this.stuId = stuId;
 		this.name = name;
 		this.sex = sex;
 		this.idCard = idCard;
@@ -111,12 +106,6 @@ public class Student {
 	}
 	public void setId(String id) {
 		this.id = id;
-	}
-	public String getStuId() {
-		return stuId;
-	}
-	public void setStuId(String stuId) {
-		this.stuId = stuId;
 	}
 	public String getName() {
 		return name;
@@ -204,7 +193,7 @@ public class Student {
 	}
 	@Override
 	public String toString() {
-		return "Student [id=" + id + ", stuId=" + stuId + ", name=" + name + ", sex=" + sex + ", idCard=" + idCard
+		return "Student [id=" + id + ", name=" + name + ", sex=" + sex + ", idCard=" + idCard
 				+ ", nation=" + nation + ", politicalStatus=" + politicalStatus + ", birthday=" + birthday + ", phone="
 				+ phone + ", email=" + email + ", stuYear=" + stuYear + ", trainingLevel=" + trainingLevel
 				+ ", inSchool=" + inSchool + ", admissionDate=" + admissionDate + ", schoolStatus=" + schoolStatus

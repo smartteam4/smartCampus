@@ -21,7 +21,7 @@ public class Elective {
 	 */
 	private String schoolTerm;
 	/**
-	 * 专业对象
+	 * 班级关系对象
 	 */
 	@DBRef
 	private ClassRelation classRelation;

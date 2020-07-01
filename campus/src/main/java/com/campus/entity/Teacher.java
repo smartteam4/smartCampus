@@ -13,14 +13,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Teacher {
 	/**
-	 * 逻辑主键
+	 * 职工号、逻辑主键
 	 */
 	@Id
 	private String id;
-	/**
-	 * 职工号
-	 */
-	private String tchId;
 	/**
 	 * 姓名
 	 */
@@ -66,11 +62,10 @@ public class Teacher {
 		super();
 	}
 
-	public Teacher(String id, String tchId, String name, String sex, String idCard, String nation,
+	public Teacher(String id, String name, String sex, String idCard, String nation,
 			String politicalStatus, String jobTtitle, Date birthday, Date entryTime, String phone, String email) {
 		super();
 		this.id = id;
-		this.tchId = tchId;
 		this.name = name;
 		this.sex = sex;
 		this.idCard = idCard;
@@ -89,14 +84,6 @@ public class Teacher {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getTchId() {
-		return tchId;
-	}
-
-	public void setTchId(String tchId) {
-		this.tchId = tchId;
 	}
 
 	public String getName() {
@@ -181,7 +168,7 @@ public class Teacher {
 
 	@Override
 	public String toString() {
-		return "Teacher [id=" + id + ", tchId=" + tchId + ", name=" + name + ", sex=" + sex + ", idCard=" + idCard
+		return "Teacher [id=" + id + ", name=" + name + ", sex=" + sex + ", idCard=" + idCard
 				+ ", nation=" + nation + ", politicalStatus=" + politicalStatus + ", jobTtitle=" + jobTtitle
 				+ ", birthday=" + birthday + ", entryTime=" + entryTime + ", phone=" + phone + ", email=" + email + "]";
 	}
