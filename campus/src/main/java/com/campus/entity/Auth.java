@@ -1,7 +1,7 @@
 package com.campus.entity;
 /**
  * 
- * @ClassName: Auth
+ * @ClassName: AuthRepository
  * @Description: 权限实体类
  * @Author 12878
  * @DateTime 2020年6月30日 下午2:56:43
@@ -90,7 +90,7 @@ public class Auth {
 
 	@Override
 	public String toString() {
-		return "Auth [id=" + id + ", score=" + score + ", elective=" + elective + ", stuQuality=" + stuQuality
+		return "AuthRepository [id=" + id + ", score=" + score + ", elective=" + elective + ", stuQuality=" + stuQuality
 				+ ", tchEvaluation=" + tchEvaluation + "]";
 	}
 

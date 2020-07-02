@@ -1,23 +1,27 @@
 package com.campus.entity;
 
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 
 /**
  * 
  * @ClassName: User
- * @Description: 用户实体类
+ * @Description: 用户实体类，使用JPA进行数据操作
  * @Author 12878
  * @DateTime 2020年6月29日 下午4:16:22
  */
-@Document
+@Entity
 public class User {
 
 	/**
 	 * 逻辑主键
 	 */
-	@Id
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
 	/**
 	 * 用户名
