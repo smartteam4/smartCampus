@@ -21,6 +21,10 @@ public class TchEvaluation {
 	 */
 	private String schoolTerm;
 	/**
+	 * 学生对象
+	 */
+	private Student student;
+	/**
 	 * 教师对象
 	 */
 	@DBRef
@@ -37,14 +41,17 @@ public class TchEvaluation {
 	public TchEvaluation() {
 		super();
 	}
-	public TchEvaluation(String id, String schoolTerm, Teacher teacher, Double score, String remark) {
+	
+	public TchEvaluation(String id, String schoolTerm, Student student, Teacher teacher, Double score, String remark) {
 		super();
 		this.id = id;
 		this.schoolTerm = schoolTerm;
+		this.student = student;
 		this.teacher = teacher;
 		this.score = score;
 		this.remark = remark;
 	}
+
 	public String getId() {
 		return id;
 	}
@@ -75,11 +82,21 @@ public class TchEvaluation {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
 	@Override
 	public String toString() {
-		return "TchEvaluation [id=" + id + ", schoolTerm=" + schoolTerm + ", teacher=" + teacher + ", score=" + score
-				+ ", remark=" + remark + "]";
+		return "TchEvaluation [id=" + id + ", schoolTerm=" + schoolTerm + ", student=" + student + ", teacher="
+				+ teacher + ", score=" + score + ", remark=" + remark + "]";
 	}
+	
 
 	
 }

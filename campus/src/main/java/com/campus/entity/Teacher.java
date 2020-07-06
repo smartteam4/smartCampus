@@ -61,6 +61,10 @@ public class Teacher {
 	public Teacher() {
 		super();
 	}
+	public Teacher(String id) {
+		super();
+		this.id = id;
+	}
 
 	public Teacher(String id, String name, String sex, String idCard, String nation,
 			String politicalStatus, String jobTtitle, Date birthday, Date entryTime, String phone, String email) {

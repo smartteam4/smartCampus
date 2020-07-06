@@ -27,6 +27,10 @@ public class StuQuality {
 	 */
 	private Student student;
 	/**
+	 * 教师对象
+	 */
+	private Teacher teacher;
+	/**
 	 * 评分
 	 */
 	private Double score;
@@ -37,11 +41,16 @@ public class StuQuality {
 	public StuQuality() {
 		super();
 	}
-	public StuQuality(String id, String schoolTerm, Student student, Double score, String remark) {
+	public StuQuality(String id) {
+		super();
+		this.id = id;
+	}
+	public StuQuality(String id, String schoolTerm, Student student, Teacher teacher, Double score, String remark) {
 		super();
 		this.id = id;
 		this.schoolTerm = schoolTerm;
 		this.student = student;
+		this.teacher = teacher;
 		this.score = score;
 		this.remark = remark;
 	}
@@ -63,6 +72,12 @@ public class StuQuality {
 	public void setStudent(Student student) {
 		this.student = student;
 	}
+	public Teacher getTeacher() {
+		return teacher;
+	}
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
 	public Double getScore() {
 		return score;
 	}
@@ -77,7 +92,7 @@ public class StuQuality {
 	}
 	@Override
 	public String toString() {
-		return "StuQuality [id=" + id + ", schoolTerm=" + schoolTerm + ", student=" + student + ", score=" + score
-				+ ", remark=" + remark + "]";
+		return "StuQuality [id=" + id + ", schoolTerm=" + schoolTerm + ", student=" + student + ", teacher=" + teacher
+				+ ", score=" + score + ", remark=" + remark + "]";
 	}
 }

@@ -1,6 +1,7 @@
 package com.campus.entity;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -18,18 +19,25 @@ public class ClassRelation {
 	/**
 	 * 学院对象
 	 */
+	@DBRef
 	private College college;
 	/**
 	 * 专业对象
 	 */
+	@DBRef
 	private Profession profession;
 	/**
 	 * 班级对象
 	 */
+	@DBRef
 	private Classes classes;
 	
 	public ClassRelation() {
 		super();
+	}
+	public ClassRelation(String id) {
+		super();
+		this.id = id;
 	}
 	public ClassRelation(String id, College college, Profession profession, Classes classes) {
 		super();
