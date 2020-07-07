@@ -47,6 +47,10 @@ public class Course {
 	public Course() {
 		super();
 	}
+	public Course(String id) {
+		super();
+		this.id = id;
+	}
 
 	public Course(String id, String name, String nature, String attribute, String type, String category, Double score,
 			Double hours) {

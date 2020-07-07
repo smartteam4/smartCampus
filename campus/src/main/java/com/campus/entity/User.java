@@ -1,6 +1,7 @@
 package com.campus.entity;
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,14 +23,16 @@ public class User {
 	 */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String id;
+	private Integer id;
 	/**
 	 * 用户名
 	 */
+    @Column(length = 30)
 	private String username;
 	/**
 	 * 密码
 	 */
+	@Column(length = 150)
 	private String password;
 	/**
 	 * 角色
@@ -42,7 +45,7 @@ public class User {
 	public User() {
 		super();
 	}
-	public User(String id, String username, String password, String role, Boolean status) {
+	public User(Integer id, String username, String password, String role, Boolean status) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -51,10 +54,10 @@ public class User {
 		this.status = status;
 	}
 	
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getUsername() {

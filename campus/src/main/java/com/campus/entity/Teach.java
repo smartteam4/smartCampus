@@ -30,6 +30,10 @@ public class Teach {
 	public Teach() {
 		super();
 	}
+	public Teach(String id) {
+		super();
+		this.id = id;
+	}
 
 	public Teach(String id, Course course, Teacher teacher) {
 		super();

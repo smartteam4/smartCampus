@@ -81,6 +81,10 @@ public class Student {
 	public Student() {
 		super();
 	}
+	public Student(String id) {
+		super();
+		this.id = id;
+	}
 	public Student(String id, String name, String sex, String idCard, String nation,
 			String politicalStatus, Date birthday, String phone, String email, Integer stuYear, String trainingLevel,
 			String inSchool, Date admissionDate, String schoolStatus, ClassRelation classRelation) {

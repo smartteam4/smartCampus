@@ -35,6 +35,10 @@ public class ClassRelation {
 	public ClassRelation() {
 		super();
 	}
+	public ClassRelation(String id) {
+		super();
+		this.id = id;
+	}
 	public ClassRelation(String id, College college, Profession profession, Classes classes) {
 		super();
 		this.id = id;
