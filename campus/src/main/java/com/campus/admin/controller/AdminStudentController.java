@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.campus.admin.service.AdminService;
-import com.campus.entity.ClassRelation;
 import com.campus.entity.Student;
-import com.campus.student.service.StudentServiceImpl;
 
 @RestController
 @RequestMapping("/admin/student")

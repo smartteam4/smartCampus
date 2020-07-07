@@ -5,7 +5,6 @@ import java.util.List;
 import com.campus.entity.Curriculum;
 import com.campus.entity.Score;
 import com.campus.entity.Student;
-import com.campus.repository.StudentRepository;
 
 public interface StudentService{
 	//取得所有学生信息
