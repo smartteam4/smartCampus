@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.campus.entity.Curriculum;
 import com.campus.entity.Score;
 import com.campus.entity.Student;
+import com.campus.entity.Teacher;
 import com.campus.student.service.StudentService;
 
 @RestController
@@ -35,7 +37,11 @@ public class StudentController {
 	public List<Curriculum> loadCurriculum(@PathVariable String id,@PathVariable String schoolTerm) {
 		return studentService.loadCurriculum(id, schoolTerm);
 	} 
-	
+	//查看需要评价的教师
+	@GetMapping("/student/{id}/tchevaluation")
+	public List<Teacher>listTeacher(@PathVariable String id){
+		return studentService.listTchEvaluations(id);
+	}
 	
 	//学生修改密码
 //	@PutMapping("/{id}/passwork")

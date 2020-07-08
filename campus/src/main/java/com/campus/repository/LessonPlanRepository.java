@@ -1,8 +1,12 @@
 package com.campus.repository;
 
+import java.util.List;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.campus.entity.Course;
 import com.campus.entity.LessonPlan;
 
 /**
@@ -14,5 +18,10 @@ import com.campus.entity.LessonPlan;
  */
 @Repository
 public interface LessonPlanRepository extends MongoRepository<LessonPlan, String> {
-
+	
+	//根据班级关系对象id取得课程对象
+	@Query(value = "{'classRelation.id':?0}",
+			fields = "{'_id':0,'course':1}"
+			)
+	List<Course> getCourses(String id);
 }

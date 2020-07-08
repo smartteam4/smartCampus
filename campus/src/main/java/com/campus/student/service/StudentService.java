@@ -5,6 +5,8 @@ import java.util.List;
 import com.campus.entity.Curriculum;
 import com.campus.entity.Score;
 import com.campus.entity.Student;
+import com.campus.entity.TchEvaluation;
+import com.campus.entity.Teacher;
 
 public interface StudentService{
 	//取得所有学生信息
@@ -15,6 +17,10 @@ public interface StudentService{
 	public List<Score> loadScore(String id,String schoolTrem);
 	//根据学期查看课表
 	public List<Curriculum> loadCurriculum(String id,String schoolTerm);
+	//获得该学生需要进行的教师评价信息
+	public List<Teacher>listTchEvaluations(String id);
+	//根据教师id来对教师进行评分和评价
+	public int evaluate(TchEvaluation tchEvaluation);
 	
 	//学生更改自身密码
 //	public int updatePassword(String role,String username,String oldpwd,String newpwd);
