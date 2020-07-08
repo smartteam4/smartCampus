@@ -25,5 +25,52 @@ public interface ClassRelationRepository extends MongoRepository<ClassRelation, 
 	@Query(value = "{'_id':?0}")
 	List<ClassRelation> findByIds(String id);
 	
+	/**
+	 * 
+	 * @Title: getProfessionByCollegeId
+	 * @Description: 根据学院id获得专业信息
+	 * @Author 12878
+	 * @DateTime 2020年7月7日 下午10:11:50
+	 * @param collegeId 学院id
+	 * @return 班级关系对象
+	 */
+	@Query(value = "{'college.id': ?0}",
+			fields = "{'classes': 0}")
+	List<ClassRelation> getProfessionByCollegeId(String collegeId);
 	
+	/**
+	 * 
+	 * @Title: findByCollege
+	 * @Description: 根据学院id获得班级信息
+	 * @Author 12878
+	 * @DateTime 2020年7月7日 下午10:12:20
+	 * @param collegeId 学院id
+	 * @return 班级关系对象
+	 */
+	@Query(value = "{'college.id': ?0}")
+	List<ClassRelation> findByCollege(String collegeId);
+	
+	/**
+	 * 
+	 * @Title: findByProfession
+	 * @Description: 根据专业id获得班级信息
+	 * @Author 12878
+	 * @DateTime 2020年7月7日 下午10:13:30
+	 * @param professionId 专业id
+	 * @return 班级关系对象
+	 */
+	@Query(value = "{'profession.id': ?0}")
+	List<ClassRelation> findByProfession(String professionId);
+	
+	/**
+	 * 
+	 * @Title: findByClasses
+	 * @Description: 根据班级id查询班级信息
+	 * @Author 12878
+	 * @DateTime 2020年7月7日 下午10:18:13
+	 * @param classesId 班级id
+	 * @return 班级关系对象
+	 */
+	@Query(value = "{'classes.id': ?0}")
+	List<ClassRelation> findByClasses(String classesId);
 }
