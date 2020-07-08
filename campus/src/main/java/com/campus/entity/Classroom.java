@@ -28,6 +28,10 @@ public class Classroom {
 	public Classroom() {
 		super();
 	}
+	public Classroom(String id) {
+		super();
+		this.id = id;
+	}
 	public Classroom(String id, String building, String local) {
 		super();
 		this.id = id;
