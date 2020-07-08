@@ -29,6 +29,11 @@ public class StuAttendance {
 	@DBRef
 	private Curriculum curriculum;
 	/**
+	 * 班级关系对象
+	 */
+	@DBRef
+	private ClassRelation classRelation;
+	/**
 	 * 缺勤原因
 	 */
 	private String reason;
@@ -36,23 +41,20 @@ public class StuAttendance {
 	 * 缺勤时间
 	 */
 	private Date date;
-	/**
-	 * 第几节课
-	 */
-	private String time;
 
 	public StuAttendance() {
 		super();
 	}
 
-	public StuAttendance(String id, Student student, Curriculum curriculum, String reason, Date date, String time) {
+	public StuAttendance(String id, Student student, Curriculum curriculum, ClassRelation classRelation, String reason,
+			Date date) {
 		super();
 		this.id = id;
 		this.student = student;
 		this.curriculum = curriculum;
+		this.classRelation = classRelation;
 		this.reason = reason;
 		this.date = date;
-		this.time = time;
 	}
 
 	public String getId() {
@@ -79,6 +81,14 @@ public class StuAttendance {
 		this.curriculum = curriculum;
 	}
 
+	public ClassRelation getClassRelation() {
+		return classRelation;
+	}
+
+	public void setClassRelation(ClassRelation classRelation) {
+		this.classRelation = classRelation;
+	}
+
 	public String getReason() {
 		return reason;
 	}
@@ -95,17 +105,10 @@ public class StuAttendance {
 		this.date = date;
 	}
 
-	public String getTime() {
-		return time;
-	}
-
-	public void setTime(String time) {
-		this.time = time;
-	}
-
 	@Override
 	public String toString() {
-		return "StuAttendance [id=" + id + ", student=" + student + ", curriculum=" + curriculum + ", reason=" + reason
-				+ ", date=" + date + ", time=" + time + "]";
+		return "StuAttendance [id=" + id + ", student=" + student + ", curriculum=" + curriculum + ", classRelation="
+				+ classRelation + ", reason=" + reason + ", date=" + date + "]";
 	}
+
 }

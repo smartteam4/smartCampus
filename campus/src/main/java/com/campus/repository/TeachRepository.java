@@ -24,4 +24,8 @@ public interface TeachRepository extends MongoRepository<Teach, String> {
 			fields = "{'teacher':1}"
 			)
 	Teacher getTeacher(String id);
+
+	@Query(value = "{'teacher.id': ?0}")
+	List<Teach> listId(String id);
+	
 }
