@@ -18,4 +18,8 @@ public interface UserRepository extends JpaRepository<User, String> {
 	
 	
 
+//	//学生更改自身密码
+//	@Modifying
+//	@Query("update user set password=?3 where role=?0 and username=?1 and password=?2")
+//	int updatePassword(String role,String username,String oldpwd,String newpwd);
 }
