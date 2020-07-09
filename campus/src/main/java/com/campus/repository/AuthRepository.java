@@ -14,5 +14,5 @@ import com.campus.entity.Auth;
  */
 @Repository
 public interface AuthRepository extends MongoRepository<Auth, String> {
-
+	
 }
