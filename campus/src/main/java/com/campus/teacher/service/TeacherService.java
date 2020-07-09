@@ -1,12 +1,14 @@
 package com.campus.teacher.service;
 
+import java.util.Date;
 import java.util.List;
 
-import org.springframework.data.jdbc.repository.query.Query;
 
 import com.campus.entity.Curriculum;
+import com.campus.entity.Score;
+import com.campus.entity.StuAttendance;
 import com.campus.entity.StuQuality;
-import com.campus.entity.Teach;
+import com.campus.entity.Teacher;
 
 public interface TeacherService {
 	/**
@@ -30,5 +32,22 @@ public interface TeacherService {
 	 */
 	int updetePassword(String id, String pwd);
 	
-	
+
+	//查询当前教师基本信息
+	Teacher loadTeacher (String id);
+	//通过指定班级/学号/日期等查看学生考勤信息 ?
+	//学号
+	List<StuAttendance> listStuAttendance(String id);
+	//日期
+	List<StuAttendance> listStuAttendancea(Date date);
+	//班级
+	List<StuAttendance> findByClaName(String id);
+	//学生考勤信息添加（仅添加缺勤信息）
+	int saveStuAttendance(StuAttendance stua);
+	//学生考勤信息修改
+	int updateStuAttendance(StuAttendance stua);
+	//学生成绩的录入
+	int saveScore(Score score);
+	//学生成绩的修改
+	int updateScore(Score score);
 }

@@ -25,6 +25,8 @@ public interface ClassRelationRepository extends MongoRepository<ClassRelation, 
 	@Query(value = "{'_id':?0}")
 	List<ClassRelation> findByIds(String id);
 	
+	
+	
 	/**
 	 * 
 	 * @Title: getProfessionByCollegeId
@@ -73,4 +75,13 @@ public interface ClassRelationRepository extends MongoRepository<ClassRelation, 
 	 */
 	@Query(value = "{'classes.id': ?0}")
 	List<ClassRelation> findByClasses(String classesId);
+	
+	/**
+	 * 通过班级id查询班级关系对象
+	 * @param classes
+	 * @return
+	 */
+	@Query(value = "{ 'classes.id' : ?0 }")
+	List<ClassRelation> findByName(String id);
+	
 }
