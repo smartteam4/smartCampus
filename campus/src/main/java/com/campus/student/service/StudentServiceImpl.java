@@ -1,6 +1,6 @@
 package com.campus.student.service;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,10 +99,10 @@ public class StudentServiceImpl implements StudentService {
 		// TODO Auto-generated method stub
 		//取得班级关系对象
 		ClassRelation classRelation=studentRespository.loadRelation(id).getClassRelation();
-		List<Course>listCourses=lessonPlanRepository.getCourses(classRelation.getId());
-		List<Teacher>listTeachers=new ArrayList<>();
+		List<Course>listCourses=lessonPlanRepository.listCourses(classRelation.getId());
+		List<Teacher>listTeachers=new LinkedList<>();
 		for(Course c:listCourses) {
-			listTeachers.add(teachRepository.getTeacher(c.getId()));
+			listTeachers.add(teachRepository.findByCourse(c.getId()).getTeacher());
 		}
 		return listTeachers;
 	}

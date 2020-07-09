@@ -30,7 +30,11 @@ public class AdminServiceImpl implements AdminService{
 		public List<Student> listStudentsBys(String college,String profession,String classes) {
 			// TODO Auto-generated method stub
 			ClassRelation classRelation=classRelationRepository.getClassRelationls(college, profession, classes);
-			return studentRespository.getClassRelation(classRelation.getId());
+			if(classRelation==null) {
+				return null;
+			}else {
+				return studentRespository.getClassRelation(classRelation.getId());				
+			}
 		}
 
 		//通过id获得学生信息
