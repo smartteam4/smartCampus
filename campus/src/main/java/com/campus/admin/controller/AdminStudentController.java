@@ -2,7 +2,9 @@ package com.campus.admin.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.collections4.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,13 +47,19 @@ public class AdminStudentController {
 
 	// 修改学生信息
 	@PutMapping
-	public int updateStudent(@RequestBody Student student) {
-		return adminService.updateStudent(student);
+	public Map<String, Object> updateStudent(@RequestBody Student student) {
+		int i=adminService.updateStudent(student);
+		Map<String, Object>map=new HashedMap<>();
+		map.put("code", i);
+		return map;
 	}
 
 	// 添加学生信息
 	@PostMapping
-	public int addStudent(@RequestBody Student student) {
-		return adminService.addStudent(student);
+	public Map<String, Object> addStudent(@RequestBody Student student) {
+		int i=adminService.addStudent(student);
+		Map<String, Object>map=new HashedMap<>();
+		map.put("code", i);
+		return map;
 	}
 }

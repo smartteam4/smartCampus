@@ -1,12 +1,15 @@
 package com.campus.student.controller;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.collections4.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,25 +51,34 @@ public class StudentController {
 	}
 	//根据教师id来对教师进行评分和评价
 	@PostMapping("/{id}/tchevaluation")
-	public int saveTchEvaluation(@RequestParam TchEvaluation tchEvaluation,@PathVariable String id) {
+	public Map<String, Object> saveTchEvaluation(@RequestBody TchEvaluation tchEvaluation,@PathVariable String id) {
 		Teacher teacher=new Teacher();
 		teacher.setId(id);
 		tchEvaluation.setTeacher(teacher);
-		return studentService.evaluate(tchEvaluation);
+		int i= studentService.evaluate(tchEvaluation);
+		Map<String, Object>map=new HashedMap<>();
+		map.put("code", i);
+		return map;
 	}
 	//学生选课
 	@PostMapping("/{id}/elective")
-	public int stuElective(@PathVariable String id,@RequestParam Elective elective) {
+	public Map<String, Object> stuElective(@PathVariable String id,@RequestParam Elective elective) {
 		Student student=new Student();
 		student.setId(id);
-		return studentService.stuEle(student, elective);
+		int i= studentService.stuEle(student, elective);
+		Map<String, Object>map=new HashedMap<>();
+		map.put("code", i);
+		return map;
 	}
 	
 	
 	//学生修改密码
-	@PutMapping("/{id}/passwork")
-	public int updatePassword(String username,String oldpwd,String newpwd) {
-		return studentService.updatePassword(username, oldpwd, newpwd);
+	@PutMapping("/{id}/password")
+	public Map<String, Object> updatePassword(@RequestParam(name = "u") String username,@RequestParam(name = "o") String oldpwd,@RequestParam(name = "n") String newpwd) {
+		int i= studentService.updatePassword(username, oldpwd, newpwd);
+		Map<String, Object>map=new HashedMap<>();
+		map.put("code", i);
+		return map;
 	}
 	
 }
