@@ -1,6 +1,9 @@
 package com.campus.repository;
 
+import java.util.List;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.campus.entity.Score;
@@ -15,4 +18,7 @@ import com.campus.entity.Score;
 @Repository
 public interface ScoreRepository extends MongoRepository<Score, String> {
 
+	//根据学期查看成绩
+	@Query(value = "{'schoolTerm':?1,'student.id':?0}")
+	List<Score> getScore(String id,String schoolTerm);
 }

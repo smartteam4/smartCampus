@@ -21,10 +21,10 @@ public class Elective {
 	 */
 	private String schoolTerm;
 	/**
-	 * 班级关系对象
+	 * 专业对象
 	 */
 	@DBRef
-	private ClassRelation classRelation;
+	private Profession profession;
 	/**
 	 * 课程对象
 	 */
@@ -47,12 +47,17 @@ public class Elective {
 		super();
 	}
 
-	public Elective(String id, String schoolTerm, ClassRelation classRelation, Course course, Integer limitNumber,
+	public Elective(String id) {
+		super();
+		this.id = id;
+	}
+
+	public Elective(String id, String schoolTerm, Profession profession, Course course, Integer limitNumber,
 			Integer selectedNumber, Boolean status) {
 		super();
 		this.id = id;
 		this.schoolTerm = schoolTerm;
-		this.classRelation = classRelation;
+		this.profession = profession;
 		this.course = course;
 		this.limitNumber = limitNumber;
 		this.selectedNumber = selectedNumber;
@@ -75,12 +80,12 @@ public class Elective {
 		this.schoolTerm = schoolTerm;
 	}
 
-	public ClassRelation getClassRelation() {
-		return classRelation;
+	public Profession getProfession() {
+		return profession;
 	}
 
-	public void setClassRelation(ClassRelation classRelation) {
-		this.classRelation = classRelation;
+	public void setProfession(Profession profession) {
+		this.profession = profession;
 	}
 
 	public Course getCourse() {
@@ -117,8 +122,8 @@ public class Elective {
 
 	@Override
 	public String toString() {
-		return "Elective [id=" + id + ", schoolTerm=" + schoolTerm + ", classRelation=" + classRelation + ", course="
-				+ course + ", limitNumber=" + limitNumber + ", selectedNumber=" + selectedNumber + ", status=" + status
-				+ "]";
+		return "Elective [id=" + id + ", schoolTerm=" + schoolTerm + ", profession=" + profession + ", course=" + course
+				+ ", limitNumber=" + limitNumber + ", selectedNumber=" + selectedNumber + ", status=" + status + "]";
 	}
+
 }

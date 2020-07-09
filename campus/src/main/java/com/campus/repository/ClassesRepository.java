@@ -1,6 +1,7 @@
 package com.campus.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.campus.entity.Classes;
@@ -15,4 +16,7 @@ import com.campus.entity.Classes;
 @Repository
 public interface ClassesRepository extends MongoRepository<Classes, String> {
 
+	//根据名称取得对象
+	@Query(value = "{'name':?0}")
+	Classes getClassesid(String name);
 }

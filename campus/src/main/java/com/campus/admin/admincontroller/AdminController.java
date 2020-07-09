@@ -16,21 +16,22 @@ import com.campus.repository.UserRepository;
 @RestController
 @RequestMapping("/admin/user")
 public class AdminController {
-@Autowired
-UserRepository userRepository;
-@GetMapping
-public List<User> findall(){
-	return userRepository.findAll();
-}
-@GetMapping("/{username}")
-public User find(@PathVariable String username) {
-	return userRepository.findByUsername(username);
-}
-@PutMapping
-public User update(
-		  @RequestBody User user) {
-	userRepository.findById(user.getId()).get();
-	return userRepository.save(user);
-}
+	@Autowired
+	UserRepository userRepository;
+
+	@GetMapping
+	public List<User> findAll() {
+		return userRepository.findAll();
+	}
+
+	@GetMapping("/{username}")
+	public User find(@PathVariable String username) {
+		return userRepository.findByUsername(username);
+	}
+
+	@PutMapping
+	public User update(@RequestBody User user) {
+		return userRepository.save(user);
+	}
 
 }

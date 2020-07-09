@@ -59,7 +59,10 @@ public class Curriculum {
 	public Curriculum() {
 		super();
 	}
-
+	public Curriculum(String id) {
+		super();
+		this.id = id;
+	}
 	public Curriculum(String id, String schoolTerm, String weekend, ClassRelation classRelation, String time,
 			String day, String startTime, String endTime, Teach teach, Classroom classroom) {
 		super();

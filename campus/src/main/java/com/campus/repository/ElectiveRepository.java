@@ -1,6 +1,7 @@
 package com.campus.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.campus.entity.Elective;
@@ -14,5 +15,8 @@ import com.campus.entity.Elective;
  */
 @Repository
 public interface ElectiveRepository extends MongoRepository<Elective, String> {
-
+	
+	//根据id得到对象
+	@Query(value = "{'_id':?0}")
+	Elective getElective(String id);
 }
