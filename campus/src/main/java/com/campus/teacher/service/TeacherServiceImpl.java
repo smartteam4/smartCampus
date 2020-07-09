@@ -2,12 +2,17 @@ package com.campus.teacher.service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.campus.entity.ClassRelation;
+
+import com.campus.admin.service.AuthService;
+
 import com.campus.entity.Curriculum;
 import com.campus.entity.Score;
 import com.campus.entity.StuAttendance;
@@ -43,10 +48,24 @@ public class TeacherServiceImpl implements TeacherService {
 	ScoreRepository scoreRepository;
 	@Autowired
 	ClassRelationRepository classRelationRepository;
+	AuthService authService;
 
 	@Override
-	public int saveStuquality(StuQuality sq) {
-		return stuQualityRepository.save(sq) == null ? 0 : 1;
+	public Map<String, Object> saveStuquality(StuQuality sq) {
+		Map<String, Object> map = new HashMap<>();
+		if (authService.selectStuQuality()) {
+			if (stuQualityRepository.save(sq) == null) {
+				map.put("code", 0); 
+				map.put("msg", "评价失败！");
+						
+			} else {
+				map.put("code", 1);
+				map.put("msg", "评价成功！");
+			}
+		} else {
+			map.put("msg", "权限未开启！");
+		}
+		return map;
 	}
 
 	@Override
@@ -61,10 +80,19 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public int updetePassword(String username, String pwd) {
+	public Map<String, Object> updetePassword(String username, String pwd) {
+		Map<String, Object> map = new HashMap<>();
 		User user = userRepository.findByUsername(username);
 		user.setPassword(pwd);
-		return userRepository.save(user) == null ? 0 : 1;
+		if (userRepository.save(user) == null) {
+			map.put("code", 0); 
+			map.put("msg", "更新失败！");
+					
+		} else {
+			map.put("code", 1);
+			map.put("msg", "更新成功！");
+		}
+		return  map;
 	}
 
 

@@ -3,6 +3,7 @@ package com.campus.student.service;
 import java.util.List;
 
 import com.campus.entity.Curriculum;
+import com.campus.entity.Elective;
 import com.campus.entity.Score;
 import com.campus.entity.Student;
 import com.campus.entity.TchEvaluation;
@@ -21,7 +22,8 @@ public interface StudentService{
 	public List<Teacher>listTchEvaluations(String id);
 	//根据教师id来对教师进行评分和评价
 	public int evaluate(TchEvaluation tchEvaluation);
-	
+	//学生选课操作
+	public int stuEle(Student student,Elective elective);
 	//学生更改自身密码
-//	public int updatePassword(String role,String username,String oldpwd,String newpwd);
+	public int updatePassword(String username,String oldpwd,String newpwd);
 }

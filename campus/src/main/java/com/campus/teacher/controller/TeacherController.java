@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +38,7 @@ public class TeacherController {
 	 * @return
 	 */
 	@PostMapping("/{id}/stuquality")
-	public int saveStuquality(@PathVariable String id,
+	public Map<String, Object> saveStuquality(@PathVariable String id,
 			@RequestBody StuQuality sq) {
 		Teacher tc = new Teacher();
 		tc.setId(id);
@@ -62,7 +63,7 @@ public class TeacherController {
 	 * @return 返回0或1
 	 */
 	@PutMapping("/{id}/password")
-	public int updetePassword(@PathVariable String id,@RequestBody HashMap<String, String> map) {
+	public Map<String, Object> updetePassword(@PathVariable String id,@RequestBody HashMap<String, String> map) {
 		return teacherService.updetePassword(id, map.get("pwd"));
 	}
 	

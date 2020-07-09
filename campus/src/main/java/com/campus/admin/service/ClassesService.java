@@ -1,6 +1,7 @@
 package com.campus.admin.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.campus.entity.ClassRelation;
 
@@ -43,5 +44,5 @@ public interface ClassesService {
 	 * @param classRelation 班级关系对象
 	 * @return 1成功，0失败
 	 */
-	int save(ClassRelation classRelation);
+	Map<String, Object> save(ClassRelation classRelation);
 }

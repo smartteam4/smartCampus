@@ -7,7 +7,6 @@ import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.campus.entity.Teach;
-import com.campus.entity.Teacher;
 
 /**
  * 
@@ -20,10 +19,8 @@ import com.campus.entity.Teacher;
 public interface TeachRepository extends MongoRepository<Teach, String> {
 	
 	//根据课程id取得教师对象
-	@Query(value = "{'course.id':?0}",
-			fields = "{'teacher':1}"
-			)
-	Teacher getTeacher(String id);
+	@Query(value = "{'course.id':?0}")
+	Teach findByCourse(String id);
 
 	@Query(value = "{'teacher.id': ?0}")
 	List<Teach> listId(String id);

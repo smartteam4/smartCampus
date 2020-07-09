@@ -16,10 +16,6 @@ public interface UserRepository extends JpaRepository<User, String> {
 	@Query(nativeQuery = true,value = "SELECT username FROM USER WHERE role='ROLE_TEACHER'")
 	List<String> findname();
 	
-	
-
-//	//学生更改自身密码
-//	@Modifying
-//	@Query("update user set password=?3 where role=?0 and username=?1 and password=?2")
-//	int updatePassword(String role,String username,String oldpwd,String newpwd);
+	@Query(nativeQuery = true,value = "SELECT * FROM USER WHERE role='ROLE_STUDENT' AND username=?1 AND password=?2")
+	User getUsers(String username,String password);
 }

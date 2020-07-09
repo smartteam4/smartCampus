@@ -1,6 +1,7 @@
-package com.campus.admin.serice;
+package com.campus.admin.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.campus.entity.Teacher;
 
@@ -21,7 +22,7 @@ public interface AdminTeacherService {
 	 * @param teacher	教师对象
 	 * @return 返回1或0
 	 */
-	int saveTeacher(Teacher teacher);
+	Map<String, Object> saveTeacher(Teacher teacher);
 	/**
 	 * 查询职工号值
 	 */
@@ -31,6 +32,6 @@ public interface AdminTeacherService {
 	 * @param teacher	教师对象
 	 * @return
 	 */
-	int update(Teacher teacher);
+	Map<String, Object> update(Teacher teacher);
 	
 }

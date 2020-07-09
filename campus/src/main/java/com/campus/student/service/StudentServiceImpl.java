@@ -1,23 +1,32 @@
 package com.campus.student.service;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.campus.entity.Auth;
 import com.campus.entity.ClassRelation;
 import com.campus.entity.Course;
 import com.campus.entity.Curriculum;
+import com.campus.entity.Elective;
 import com.campus.entity.Score;
+import com.campus.entity.StuElective;
 import com.campus.entity.Student;
 import com.campus.entity.TchEvaluation;
 import com.campus.entity.Teacher;
+import com.campus.entity.User;
+import com.campus.repository.AuthRepository;
 import com.campus.repository.CurriculumRepository;
+import com.campus.repository.ElectiveRepository;
 import com.campus.repository.LessonPlanRepository;
 import com.campus.repository.ScoreRepository;
+import com.campus.repository.StuElectiveRepostory;
 import com.campus.repository.StudentRepository;
+import com.campus.repository.TchEvaluationRepository;
 import com.campus.repository.TeachRepository;
+import com.campus.repository.UserRepository;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -32,6 +41,16 @@ public class StudentServiceImpl implements StudentService {
 	LessonPlanRepository lessonPlanRepository;
 	@Autowired
 	TeachRepository teachRepository;
+	@Autowired
+	AuthRepository authRepository;
+	@Autowired
+	TchEvaluationRepository tchEvaluationRepository;
+	@Autowired
+	ElectiveRepository electiveRepository;
+	@Autowired
+	StuElectiveRepostory stuElectiveRepostory;
+	@Autowired
+	UserRepository userRepository;
 	
 	//取得所有学生信息
 	@Override
@@ -53,12 +72,21 @@ public class StudentServiceImpl implements StudentService {
 		// TODO Auto-generated method stub
 		return scoreRepository.getScore(id, schoolTrem);
 	}
+	
 	//学生更改自身密码
-//	@Override
-//	public int updatePassword(String role, String username, String oldpwd, String newpwd) {
-//		// TODO Auto-generated method stub
-//		return userRepository.updatePassword(role, username, oldpwd, newpwd);
-//	}
+	@Override
+	public int updatePassword(String username, String oldpwd, String newpwd) {
+		// TODO Auto-generated method stub
+		User user=userRepository.getUsers(username, oldpwd);
+		if(user!=null) {
+			user.setPassword(newpwd);
+			userRepository.save(user);
+			return 1;
+		}else {
+			return 0;
+		}
+	}
+	
 	//根据学期查看课表
 	@Override
 	public List<Curriculum> loadCurriculum(String id, String schoolTerm) {
@@ -71,10 +99,10 @@ public class StudentServiceImpl implements StudentService {
 		// TODO Auto-generated method stub
 		//取得班级关系对象
 		ClassRelation classRelation=studentRespository.loadRelation(id).getClassRelation();
-		List<Course>listCourses=lessonPlanRepository.getCourses(classRelation.getId());
-		List<Teacher>listTeachers=new ArrayList<>();
+		List<Course>listCourses=lessonPlanRepository.listCourses(classRelation.getId());
+		List<Teacher>listTeachers=new LinkedList<>();
 		for(Course c:listCourses) {
-			listTeachers.add(teachRepository.getTeacher(c.getId()));
+			listTeachers.add(teachRepository.findByCourse(c.getId()).getTeacher());
 		}
 		return listTeachers;
 	}
@@ -82,8 +110,36 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public int evaluate(TchEvaluation tchEvaluation) {
 		// TODO Auto-generated method stub
-		
-		return 1;
+		Auth auth=authRepository.findAll().get(0);
+		if(auth.getTchEvaluation()) {
+			tchEvaluationRepository.save(tchEvaluation);
+			return 1;
+		}else {
+			return 0;
+		}
+	}
+	//学生选课
+	@Override
+	public int stuEle(Student student, Elective elective) {
+		// TODO Auto-generated method stub
+		//判断选课开关
+		Auth auth=authRepository.findAll().get(0);
+		//得到选课
+		Elective ele=electiveRepository.getElective(elective.getId());
+		if(auth.getElective()&&ele.getStatus()) {
+			elective.setSelectedNumber(ele.getSelectedNumber()+1);
+			if(ele.getSelectedNumber()+1==20) {
+				ele.setStatus(false);
+			}
+			electiveRepository.save(ele);
+			StuElective stuElective=new StuElective();
+			stuElective.setStudent(student);
+			stuElective.setElective(ele);
+			stuElectiveRepostory.save(stuElective);
+			return 1;
+		}else {
+			return 0;
+		}
 	}
 
 	

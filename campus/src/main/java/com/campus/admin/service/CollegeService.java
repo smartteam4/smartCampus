@@ -1,6 +1,7 @@
 package com.campus.admin.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.campus.entity.College;
 
@@ -32,5 +33,5 @@ public interface CollegeService {
 	 * @param college
 	 * @return 1成功，0失败
 	 */
-	int saveCollege(College college);
+	Map<String, Object> saveCollege(College college);
 }

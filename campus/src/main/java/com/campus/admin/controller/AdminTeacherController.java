@@ -1,8 +1,7 @@
 package com.campus.admin.controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.campus.admin.serice.AdminTeacherService;
+import com.campus.admin.service.AdminTeacherService;
 import com.campus.entity.Teacher;
 import com.campus.repository.UserRepository;
 
@@ -40,9 +39,7 @@ public class AdminTeacherController {
 	 */
 	@GetMapping("/teacher/{id}")
 	public Teacher loadTeacher(@PathVariable String id) {
-		
 		return adminTeacherService.loadTeacher(id);
-		
 	}
 	/**
 	 * 添加教师
@@ -50,7 +47,7 @@ public class AdminTeacherController {
 	 * @return 返回1或0
 	 */
 	@PostMapping("/teacher")
-	public int saveTeacher(@RequestBody Teacher teacher) {
+	public Map<String, Object> saveTeacher(@RequestBody Teacher teacher) {
 		return adminTeacherService.saveTeacher(teacher);
 	}
 	/**
@@ -59,9 +56,8 @@ public class AdminTeacherController {
 	 * @return
 	 */
 	@PutMapping("/teacher")
-	public int update(@RequestBody Teacher teacher) {
+	public Map<String, Object> update(@RequestBody Teacher teacher) {
 		return adminTeacherService.update(teacher);
-		
 	}
 
 }

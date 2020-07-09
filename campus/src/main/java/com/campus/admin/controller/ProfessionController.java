@@ -1,6 +1,7 @@
 package com.campus.admin.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,13 +37,13 @@ public class ProfessionController {
 	}
 	
 	@PutMapping
-	public int update(@RequestBody Profession profession) {
+	public Map<String, Object> update(@RequestBody Profession profession) {
 		return professionService.saveProfession(profession);
 	}
 	
 
 	@PostMapping
-	public int save(@RequestBody Profession profession) {
+	public Map<String, Object> save(@RequestBody Profession profession) {
 		return professionService.saveProfession(profession);
 	}
 	

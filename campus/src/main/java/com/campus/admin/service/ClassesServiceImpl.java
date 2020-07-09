@@ -1,6 +1,8 @@
 package com.campus.admin.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,10 +46,17 @@ public class ClassesServiceImpl implements ClassesService {
 	}
 
 	@Override
-	public int save(ClassRelation classRelation) {
-		return classesRepository.save(classRelation.getClasses()) == null
-				|| classRelationRepository.save(classRelation) == null
-				? 0 : 1;
+	public Map<String, Object> save(ClassRelation classRelation) {
+		Map<String, Object> map = new HashMap<>();
+		if (classesRepository.save(classRelation.getClasses()) == null
+				|| classRelationRepository.save(classRelation) == null) {
+			map.put("code", 0);
+			map.put("msg", "保存失败！");
+		} else {
+			map.put("code", 1);
+			map.put("msg", "保存成功！");
+		}
+		return map;
 	}
 
 }

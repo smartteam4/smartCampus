@@ -1,6 +1,7 @@
 package com.campus.admin.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,10 +51,13 @@ public class CollegeController {
 	 * @return
 	 */
 	@PutMapping
-	@PostMapping
-	public int updateCollege(@RequestBody College college) {
+	public  Map<String, Object> updateCollege(@RequestBody College college) {
 		return collegeService.saveCollege(college);
-		
+	}
+
+	@PostMapping
+	public  Map<String, Object> saveCollege(@RequestBody College college) {
+		return collegeService.saveCollege(college);
 	}
 
 }

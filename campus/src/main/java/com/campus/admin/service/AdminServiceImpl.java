@@ -30,29 +30,28 @@ public class AdminServiceImpl implements AdminService{
 		public List<Student> listStudentsBys(String college,String profession,String classes) {
 			// TODO Auto-generated method stub
 			ClassRelation classRelation=classRelationRepository.getClassRelationls(college, profession, classes);
-			return studentRespository.getClassRelation(classRelation.getId());
+			if(classRelation==null) {
+				return null;
+			}else {
+				return studentRespository.getClassRelation(classRelation.getId());				
+			}
 		}
 
 		//通过id获得学生信息
 		@Override
 		public Student loadStudent(String id) {
-			// TODO Auto-generated method stub
 			return studentRespository.getStudent(id);
 		}
 
 		//修改学生信息
 		@Override
 		public int updateStudent(Student student) {
-			// TODO Auto-generated method stub
-			studentRespository.save(student);
-			return 1;
+			return studentRespository.save(student) == null ? 0 : 1;
 		}
+		
 		//添加学生信息
 		@Override
 		public int addStudent(Student student) {
-			// TODO Auto-generated method stub
-			studentRespository.save(student);
-			return 1;
+			return studentRespository.save(student) == null ? 0 : 1;
 		}
-
 }

@@ -1,5 +1,7 @@
 package com.campus.admin.service;
 
+import java.util.Map;
+
 import com.campus.entity.Auth;
 
 /**
@@ -31,7 +33,7 @@ public interface AuthService {
 	 * @param auth 权限对象
 	 * @return 1成功，0失败
 	 */
-	int save(Auth auth);
+	Map<String, Object> save(Auth auth);
 	
 	/**
 	 * 

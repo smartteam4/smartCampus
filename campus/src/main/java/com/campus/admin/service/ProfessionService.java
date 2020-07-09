@@ -1,6 +1,7 @@
 package com.campus.admin.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.campus.entity.ClassRelation;
 import com.campus.entity.Profession;
@@ -44,5 +45,5 @@ public interface ProfessionService {
 	 * @param profession 专业对象
 	 * @return 1成功，0失败
 	 */
-	int saveProfession(Profession profession);
+	Map<String, Object> saveProfession(Profession profession);
 }

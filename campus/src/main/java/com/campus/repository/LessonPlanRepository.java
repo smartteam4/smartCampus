@@ -20,8 +20,6 @@ import com.campus.entity.LessonPlan;
 public interface LessonPlanRepository extends MongoRepository<LessonPlan, String> {
 	
 	//根据班级关系对象id取得课程对象
-	@Query(value = "{'classRelation.id':?0}",
-			fields = "{'_id':0,'course':1}"
-			)
-	List<Course> getCourses(String id);
+	@Query(value = "{'classRelation.id':?0}")
+	List<Course> listCourses(String id);
 }
