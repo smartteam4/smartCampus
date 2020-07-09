@@ -14,5 +14,5 @@ import com.campus.entity.Teacher;
  */
 @Repository
 public interface TeacherRepository extends MongoRepository<Teacher, String> {
-
+	
 }
