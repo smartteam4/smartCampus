@@ -1,4 +1,4 @@
-package com.campus.admin.admincontroller;
+package com.campus.admin.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -137,7 +137,6 @@ public class AdminController {
 			@RequestParam(name = "sch") String SchoolTerm,
 			@RequestParam(name = "cla") ClassRelation classRelation){
 		return adminService.listLessonPlanByLessonPlans(SchoolTerm,classRelation);
-		
 	}
 
 	//保存课程计划  ???
@@ -153,7 +152,6 @@ public class AdminController {
 	public int updateLessonPlanByLessonPlan(
 			@RequestBody LessonPlan lessonPlan) {
 		return adminService.updateLessonPlanByLessonPlan(lessonPlan);
-		
 	}
 
 }

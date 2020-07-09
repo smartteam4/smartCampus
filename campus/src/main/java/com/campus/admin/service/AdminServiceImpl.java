@@ -1,7 +1,6 @@
 package com.campus.admin.service;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +15,6 @@ import com.campus.entity.StuAttendance;
 import com.campus.entity.StuQuality;
 import com.campus.entity.Student;
 import com.campus.entity.TchEvaluation;
-import com.campus.entity.Teacher;
 import com.campus.repository.ClassRelationRepository;
 import com.campus.repository.CurriculumRepository;
 import com.campus.repository.ElectiveRepository;
@@ -26,6 +24,7 @@ import com.campus.repository.StuQualityRepository;
 import com.campus.repository.StudentRepository;
 import com.campus.repository.TchEvaluationRepository;
 import com.campus.repository.TeacherRepository;
+
 @Service
 public class AdminServiceImpl implements AdminService{
 
@@ -155,6 +154,15 @@ public class AdminServiceImpl implements AdminService{
 			return 1;
 		}
 
+		//修改选课信息
+		@Override
+		public int updateElectiveByElective(Elective elective) {
+			// TODO Auto-generated method stub
+			ElectiveRepository.findById(elective.getId()).get();
+			ElectiveRepository.save(elective);
+			return 1;
+		}
+
 		//通过指定学期和班级关系对象(指定学院专业和班级)查找课表
 		@Override
 		public Map<String, Object> loadCurriculumByschoolTermAndClassRelation(String schoolTerm,
@@ -170,15 +178,7 @@ public class AdminServiceImpl implements AdminService{
 			}
 			return map;
 		}
-
-		//修改选课信息
-		@Override
-		public int updateElectiveByElective(Elective elective) {
-			// TODO Auto-generated method stub
-			ElectiveRepository.findById(elective.getId()).get();
-			ElectiveRepository.save(elective);
-			return 1;
-		}
+		
 		//通过指定学期、学院、专业和班级查找选课表
 //		@Override
 //		public Map<String, List<Elective>> loadElectiveRepositoryByschoolTermAndClassRelation(String schoolTerm,
@@ -259,18 +259,5 @@ public class AdminServiceImpl implements AdminService{
 			LessonPlanRepository.save(lessonPlan);
 			return 1;
 		}
-
-		
-	
-	
-	
-		
-
-		
-
-		
-
-		
-
 
 }
