@@ -1,4 +1,4 @@
-package com.campus.admin.serice;
+package com.campus.admin.service;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.campus.admin.serice.AdminTeacherService;
+import com.campus.admin.service.AdminTeacherService;
 import com.campus.entity.Teacher;
 import com.campus.repository.UserRepository;
 
