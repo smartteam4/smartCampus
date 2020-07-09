@@ -27,4 +27,11 @@ public interface CurriculumRepository extends MongoRepository<Curriculum, String
 	
 	List<Curriculum> findByTeach(Teach teach);
 	
+	//根据学期查课表
+	@Query(value = "{'schoolTerm':?0}")
+	List<Curriculum> getCurriculum(String schoolTerm);
+	//根据（学院、专业）班级
+	@Query(value = "{'classRelation.id':?0}")
+	List<Curriculum> getCurriculumByCollege(String id);
+
 }

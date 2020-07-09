@@ -22,6 +22,13 @@ public interface StuAttendanceRepository extends MongoRepository<StuAttendance, 
 	@Query(value = "{'curriculum.id': ?0, 'student.id' : ?1}")
 	List<StuAttendance> listStuAttendance(String culmId, String stuId);
 	
+	//通过指定学号/日期等查看学生考勤信息 
+	@Query(value = "{'student.id':?0,'date':?1}")
+	List<StuAttendance>listStuAttendanceByidAndDate(String id,String date);
+	
+	@Query(value = "{ 'student.id' : ?0 }")
+	List<StuAttendance> listStuAttendance(String id);
+	
 	@Query(value = "{'curriculum.id': ?0, 'date' : ?1}")
 	List<StuAttendance> findByDate(String culmId, Date date);
 	

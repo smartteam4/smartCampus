@@ -1,4 +1,4 @@
-package com.campus.admin.bulltioncontroller;
+package com.campus.admin.controller;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import com.campus.repository.BulletinRepository;
 
 @RestController
 @RequestMapping("/admin")
-public class bulletController {
+public class BulletController {
   @Autowired
   BulletinRepository bulletinRepository;
   @GetMapping("/bulletin")

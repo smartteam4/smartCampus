@@ -1,6 +1,9 @@
 package com.campus.repository;
 
+import java.util.List;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.campus.entity.StuQuality;
@@ -14,5 +17,12 @@ import com.campus.entity.StuQuality;
  */
 @Repository
 public interface StuQualityRepository extends MongoRepository<StuQuality, String> {
-
+	
+	//根据学期取得素质数据
+	@Query(value = "{'schoolTerm':?0}")
+	List<StuQuality> listStuQuality(String schoolTerm);
+	
+	//根据学生对象取得素质数据
+	@Query(value = "{'student.id':?0}")
+	List<StuQuality> listStuQualitiesByStudent(String id);
 }
