@@ -26,11 +26,40 @@ public interface StuAttendanceRepository extends MongoRepository<StuAttendance, 
 	@Query(value = "{'student.id':?0,'date':?1}")
 	List<StuAttendance>listStuAttendanceByidAndDate(String id,String date);
 	
-	@Query(value = "{ 'student.id' : ?0 }")
+	@Query(value = "{ 'student.id' : ?0}")
 	List<StuAttendance> listStuAttendance(String id);
 	
 	@Query(value = "{'curriculum.id': ?0, 'date' : ?1}")
 	List<StuAttendance> findByDate(String culmId, Date date);
+	
+	@Query(value = "{ 'classRelation.id' : ?0}")
+	List<StuAttendance> findByClaName(String id);
+	
+	List<StuAttendance> findByDate(Date date);
+	
+	/**
+	 * 
+	 * @Title: findByStudentId
+	 * @Description: 通过学生id查询考勤信息
+	 * @Author 12878
+	 * @DateTime 2020年7月9日 下午6:10:15
+	 * @param stuId 学生id
+ 	 * @return 考勤信息
+	 */
+	@Query(value = "{ 'student.id' : ?0}")
+	List<StuAttendance> findByStudentId(String stuId);
+
+	/**
+	 * 
+	 * @Title: findByClassRelation
+	 * @Description: 通过班级关系对象id查询考勤信息
+	 * @Author 12878
+	 * @DateTime 2020年7月9日 下午6:11:14
+	 * @param crId 班级关系对象id
+	 * @return 考勤信息
+	 */
+	@Query(value = "{ 'classRelation.id' : ?0}")
+	List<StuAttendance> findByClassRelationId(String crId);
 	
 	@Query(value = "{'curriculum.id': ?0, 'ClassRelation.id' : ?1 }")
 	List<StuAttendance> findByClass(String culmId, String classId);

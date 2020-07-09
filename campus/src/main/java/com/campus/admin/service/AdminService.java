@@ -1,9 +1,9 @@
 package com.campus.admin.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import com.campus.entity.ClassRelation;
 import com.campus.entity.Curriculum;
 import com.campus.entity.Elective;
 import com.campus.entity.LessonPlan;
@@ -47,13 +47,13 @@ public interface AdminService {
 	public Map<String, List<StuQuality>> listStuQualitiesByStudent(String college,String profession,String classes);
 	
 	//通过指定班级、学号、日期等查看学生考勤信息
-	public List<StuAttendance> listStuAttendanceByStudentAndDate(String id,String date);
+	public List<StuAttendance> listStuAttendance(Date date, StuAttendance stuAttendance);
 	
 	//学生考勤信息修改
 	public int updateStuAttendanceByStuAttendeance(StuAttendance stuAttendance);
 	
 	//通过指定学期、学院、专业和班级查找课表
-	public Map<String, Object> loadCurriculumByschoolTermAndClassRelation(String schoolTerm,String college,String profession,String classes);
+	public List<Curriculum> listCurriculum(Curriculum curriculum);
 
 	//保存课表信息
 	public int saveCurriculumByCurriculum(Curriculum curriculum);
@@ -65,7 +65,7 @@ public interface AdminService {
 	public int updateElectiveByElective(Elective elective);
 
 	//通过指定学期、学院、专业和班级查找课程计划
-	public Map<String, List<LessonPlan>> listLessonPlanByLessonPlans(String SchoolTerm, ClassRelation classRelation);
+	public List<LessonPlan> listLessonPlan(LessonPlan lessonPlan);
 
 	//保存课程计划
 	public int saveLessonPlanByLessonPlan(LessonPlan lessonPlan);

@@ -1,5 +1,7 @@
 package com.campus.admin.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.campus.admin.service.AdminService;
 import com.campus.entity.User;
 import com.campus.repository.UserRepository;
-import com.campus.entity.ClassRelation;
 import com.campus.entity.Curriculum;
 import com.campus.entity.Elective;
 import com.campus.entity.LessonPlan;
@@ -32,7 +33,7 @@ public class AdminController {
 	@Autowired
 	AdminService adminService;
 
-	@GetMapping
+	@GetMapping("/user")
 	public List<User> findAll() {
 		return userRepository.findAll();
 	}
@@ -42,10 +43,11 @@ public class AdminController {
 		return userRepository.findByUsername(username);
 	}
 
-	@PutMapping
+	@PutMapping("/user")
 	public User update(@RequestBody User user) {
 		return userRepository.save(user);
 	}
+	
 	//获得指定学期的全部教师评价--ok
 	@GetMapping("/tchevaluation/{schoolTerm}")
 	public List<TchEvaluation> listTchEvaluationByschoolTerm(
@@ -79,14 +81,29 @@ public class AdminController {
 	}
 	
 	//通过指定班级、学号、日期等查看学生考勤信息 ???
-	@GetMapping("/stuattendance/{id}")
+	@GetMapping("/stuattendance/{date}")
 	public List<StuAttendance> listStuAttendanceByStudentAndDate(
-			@PathVariable String id,
-			@RequestBody String date){
-		return adminService.listStuAttendanceByStudentAndDate(id,date);
+			@PathVariable(required = false) String date,
+			@RequestBody(required = false) StuAttendance stuAttendance) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		return adminService.listStuAttendance(sdf.parse(date), stuAttendance);
 		
 	}
 	
+	//通过指定学期、班级关系id（学院、专业、班级）查找课表 ???
+	@GetMapping("/curriculum")
+	public List<Curriculum> loadCurriculumByschoolTermAndClassRelation(
+			@PathVariable(required = false) String date,
+			@RequestBody(required = false) Curriculum curriculum) throws ParseException {
+		return adminService.listCurriculum(curriculum);
+	}
+
+	//通过指定学期、学院、专业和班级查找课程计划  ???
+	@GetMapping("/lessonplan")
+	public List<LessonPlan> listLessonPlanByLessonPlans(@RequestBody LessonPlan lessonPlan){
+		return adminService.listLessonPlan(lessonPlan);
+	}
+		
 	//学生考勤信息修改  ???
 	@PutMapping("/stuattendance/{stuAttendance}")
 	public int updateStuAttendanceByStuAttendeance(
@@ -94,23 +111,11 @@ public class AdminController {
 		return adminService.updateStuAttendanceByStuAttendeance(stuAttendance);
 	}
 	
-	//通过指定学期、班级关系id（学院、专业、班级）查找课表 ???
-	@GetMapping("/curriculum/{schoolTerm}")
-	public Map<String, Object> loadCurriculumByschoolTermAndClassRelation(
-			@PathVariable String schoolTerm,
-			@RequestParam(required = false) String college,
-			@RequestParam(required = false) String profession,
-			@RequestParam(required = false) String classes
-			) {
-		return adminService.loadCurriculumByschoolTermAndClassRelation(schoolTerm, college, profession, classes);
-	}
-
 	//保存课表信息  ???
 	@PostMapping("/curriculum")
 	public int saveCurriculumByCurriculum(
 			@RequestBody Curriculum curriculum) {
 				return adminService.saveCurriculumByCurriculum(curriculum);
-		
 	}
 
 
@@ -129,14 +134,6 @@ public class AdminController {
 			@RequestBody Elective elective) {
 		return adminService.updateElectiveByElective(elective);
 		
-	}
-
-	//通过指定学期、学院、专业和班级查找课程计划  ???
-	@GetMapping("/lessonplan")
-	public Map<String, List<LessonPlan>> listLessonPlanByLessonPlans(
-			@RequestParam(name = "sch") String SchoolTerm,
-			@RequestParam(name = "cla") ClassRelation classRelation){
-		return adminService.listLessonPlanByLessonPlans(SchoolTerm,classRelation);
 	}
 
 	//保存课程计划  ???
