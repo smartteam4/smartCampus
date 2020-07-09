@@ -43,11 +43,11 @@ public interface TeacherService {
 	//班级
 	List<StuAttendance> findByClaName(String id);
 	//学生考勤信息添加（仅添加缺勤信息）
-	int saveStuAttendance(StuAttendance stua);
+	Map<String, Object> saveStuAttendance(StuAttendance stua);
 	//学生考勤信息修改
-	int updateStuAttendance(StuAttendance stua);
+	Map<String, Object> updateStuAttendance(StuAttendance stua);
 	//学生成绩的录入
-	int saveScore(Score score);
+	Map<String, Object> saveScore(Score score);
 	//学生成绩的修改
-	int updateScore(Score score);
+	Map<String, Object> updateScore(Score score);
 }

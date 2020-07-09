@@ -96,13 +96,13 @@ public class TeacherController {
 	
 	//添加考勤信息
 	@PostMapping("/saveStuAttendance")
-	public int saveStuAttendance(@RequestBody StuAttendance stua) {		
+	public Map<String, Object> saveStuAttendance(@RequestBody StuAttendance stua) {		
 		return teacherService.saveStuAttendance(stua);
 	}
 	
 	//修改考勤信息
 	@PutMapping("/updateStuAttendance")
-	public int updateStuAttendance(
+	public Map<String, Object> updateStuAttendance(
 			@RequestBody StuAttendance stua
 			) {
 		return teacherService.updateStuAttendance(stua);
@@ -110,7 +110,7 @@ public class TeacherController {
 	
 	//学生成绩录入
 	@PostMapping("/saveScore")
-	public int saveScore(
+	public Map<String, Object> saveScore(
 			@RequestBody Score score
 			) {
 		
@@ -119,7 +119,7 @@ public class TeacherController {
 	
 	//学生成绩修改
 	@PutMapping("/updateScore")
-	public int updateScore(
+	public Map<String, Object> updateScore(
 			@RequestBody Score score
 			) {
 		return teacherService.saveScore(score);

@@ -139,32 +139,70 @@ public class TeacherServiceImpl implements TeacherService {
 	 * 学生考勤信息添加（仅添加缺勤信息）
 	 */
 	@Override
-	public int saveStuAttendance(StuAttendance stua) {
-		return stuAttendanceRepository.save(stua) == null ? 0 : 1;
+	public Map<String, Object> saveStuAttendance(StuAttendance stua) {
+		Map<String, Object> map = new HashMap<>();
+		if (stuAttendanceRepository.save(stua) == null) {
+			map.put("code", 0); 
+			map.put("msg", "添加失败！");
+					
+		} else {
+			map.put("code", 1);
+			map.put("msg", "添加成功！");
+		}
+		return  map;
 	}
 
 	/**
 	 * 学生考勤信息修改
 	 */
 	@Override
-	public int updateStuAttendance(StuAttendance stua) {
-		return stuAttendanceRepository.save(stua) == null ? 0 : 1;
+	public Map<String, Object> updateStuAttendance(StuAttendance stua) {
+		
+		Map<String, Object> map = new HashMap<>();
+		if (stuAttendanceRepository.save(stua) == null) {
+			map.put("code", 0); 
+			map.put("msg", "更新失败！");
+					
+		} else {
+			map.put("code", 1);
+			map.put("msg", "更新成功！");
+		}
+		return  map;
 	}
 
 	/***
 	 * 学生成绩的录入
 	 */
 	@Override
-	public int saveScore(Score score) {
-		return scoreRepository.save(score) == null ? 0 : 1;
+	public Map<String, Object> saveScore(Score score) {
+		
+		Map<String, Object> map = new HashMap<>();
+		if (scoreRepository.save(score) == null) {
+			map.put("code", 0); 
+			map.put("msg", "录入失败！");
+					
+		} else {
+			map.put("code", 1);
+			map.put("msg", "录入成功！");
+		}
+		return  map;
 	}
 
 	/**
 	 * 学生成绩的修改
 	 */
 	@Override
-	public int updateScore(Score score) {
-		return scoreRepository.save(score) == null ? 0 : 1;
+	public Map<String, Object> updateScore(Score score) {
+		Map<String, Object> map = new HashMap<>();
+		if (scoreRepository.save(score) == null) {
+			map.put("code", 0); 
+			map.put("msg", "录入失败！");
+					
+		} else {
+			map.put("code", 1);
+			map.put("msg", "录入成功！");
+		}
+		return  map;
 	}
 
 	
