@@ -2,23 +2,20 @@ package com.campus.teacher.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.campus.entity.Curriculum;
 import com.campus.entity.StuQuality;
-import com.campus.entity.Student;
 import com.campus.entity.Teacher;
-import com.campus.repository.StuQualityRepository;
 import com.campus.teacher.service.TeacherService;
 
 @RestController
@@ -34,7 +31,7 @@ public class TeacherController2 {
 	 * @return
 	 */
 	@PostMapping("/{id}/stuquality")
-	public int saveStuquality(@PathVariable String id,
+	public Map<String, Object> saveStuquality(@PathVariable String id,
 			@RequestBody StuQuality sq) {
 		Teacher tc = new Teacher();
 		tc.setId(id);
@@ -59,7 +56,7 @@ public class TeacherController2 {
 	 * @return 返回0或1
 	 */
 	@PutMapping("/{id}/password")
-	public int updetePassword(@PathVariable String id,@RequestBody HashMap<String, String> map) {
+	public Map<String, Object> updetePassword(@PathVariable String id,@RequestBody HashMap<String, String> map) {
 		return teacherService.updetePassword(id, map.get("pwd"));
 	}
 	

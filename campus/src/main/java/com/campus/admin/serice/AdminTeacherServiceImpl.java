@@ -2,9 +2,10 @@ package com.campus.admin.serice;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.collections4.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Service;
 
 import com.campus.entity.Teacher;
@@ -31,13 +32,21 @@ public class AdminTeacherServiceImpl implements AdminTeacherService {
 	}
 	
 	@Override
-	public int saveTeacher(Teacher teacher) {
+	public Map<String, Object> saveTeacher(Teacher teacher) {
 		if (MAX_ID==0) {
 			cha();
 		}
 		teacher.setId((++MAX_ID).toString());
-		
-		return teacherRepository.save(teacher) == null ? 0 : 1 ;
+		Map<String, Object> map = new HashedMap<>();
+		if (teacherRepository.save(teacher) == null) {
+			map.put("code", 0); 
+			map.put("msg", "保存失败！");
+					
+		} else {
+			map.put("code", 1);
+			map.put("msg", "保存成功！");
+		}
+		return  map;
 	}
 
 	@Override
@@ -57,8 +66,17 @@ public class AdminTeacherServiceImpl implements AdminTeacherService {
 	}
 
 	@Override
-	public int update(Teacher teacher) {
-		return teacherRepository.save(teacher) == null ? 0 : 1;
+	public Map<String, Object> update(Teacher teacher) {
+		Map<String, Object> map = new HashedMap<>();
+		if (teacherRepository.save(teacher) == null) {
+			map.put("code", 0); 
+			map.put("msg", "更新失败！");
+					
+		} else {
+			map.put("code", 1);
+			map.put("msg", "更新成功！");
+		}
+		return  map;
 	}
 
 	

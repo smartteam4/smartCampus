@@ -1,9 +1,12 @@
 package com.campus.admin.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,4 +36,13 @@ public class ClassesController {
 		return classesService.list();
 	}
 	
+	@PostMapping
+	public Map<String, Object> save(@RequestBody ClassRelation classRelation) {
+		return classesService.save(classRelation);
+	}
+	
+	@PutMapping
+	public Map<String, Object> update(@RequestBody ClassRelation classRelation) {
+		return classesService.save(classRelation);
+	}
 }

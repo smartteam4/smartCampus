@@ -1,5 +1,8 @@
 package com.campus.admin.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,9 +26,17 @@ public class AuthServiceImpl implements AuthService {
 	}
 	
 	@Override
-	public int save(Auth auth) {
+	public Map<String, Object> save(Auth auth) {
 		auth.setId(AUTH_ID);
-		return authRepository.save(auth) == null ? 0 : 1;
+		Map<String, Object> map = new HashMap<>();
+		if (authRepository.save(auth) == null) {
+			map.put("code", 0);
+			map.put("msg", "添加失败！");
+		} else {
+			map.put("code", 1);
+			map.put("msg", "添加成功！");
+		}
+		return map;
 	}
 
 
