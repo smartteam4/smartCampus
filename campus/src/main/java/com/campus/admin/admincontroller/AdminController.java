@@ -1,6 +1,5 @@
 package com.campus.admin.admincontroller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,19 +12,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.campus.admin.service.AdminService;
 import com.campus.entity.User;
 import com.campus.repository.UserRepository;
-import org.springframework.stereotype.Controller;
 import com.campus.entity.ClassRelation;
 import com.campus.entity.Curriculum;
 import com.campus.entity.Elective;
 import com.campus.entity.LessonPlan;
 import com.campus.entity.StuAttendance;
 import com.campus.entity.StuQuality;
-import com.campus.entity.Student;
 import com.campus.entity.TchEvaluation;
 
 @RestController
@@ -98,7 +94,7 @@ public class AdminController {
 		return adminService.updateStuAttendanceByStuAttendeance(stuAttendance);
 	}
 	
-	//通过指定学期、学院、专业和班级查找课表 ???
+	//通过指定学期、班级关系id（学院、专业、班级）查找课表 ???
 	@GetMapping("/curriculum/{schoolTerm}")
 	public Map<String, Object> loadCurriculumByschoolTermAndClassRelation(
 			@PathVariable String schoolTerm,
