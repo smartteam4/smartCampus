@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.campus.entity.Curriculum;
+import com.campus.entity.Teach;
 
 /**
  * 
@@ -23,4 +24,7 @@ public interface CurriculumRepository extends MongoRepository<Curriculum, String
 	//根据学期查课表
 	@Query(value = "{'classRelation.id':?0,'schoolTerm':?1}")
 	List<Curriculum> getCurriculum(String classid,String schoolTerm);
+	
+	List<Curriculum> findByTeach(Teach teach);
+	
 }

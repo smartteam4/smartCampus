@@ -75,42 +75,52 @@ public class TeacherController {
 	
 	//通过指定班级/学号/日期等查看学生考勤信息 ?
 	//学号
-	@GetMapping("/StuAttendance/{id}")
-	public List<StuAttendance> listStuAttendance(@PathVariable String id){
-		return teacherService.listStuAttendance(id);
+	@GetMapping("/{id}/stuattendance/{stuId}")
+	public List<StuAttendance> listStuAttendance(
+			@PathVariable String id,
+			@PathVariable String stuId){
+		return teacherService.listStuAttendance(id, stuId);
 	}
 
 	//日期
-	@GetMapping("/StuAttendancea/{date}")
-	public List<StuAttendance> listStuAttendancea(@PathVariable String date) throws ParseException{
+	@GetMapping("/{id}/stuattendancea/{date}")
+	public List<StuAttendance> listStuAttendancea(
+			@PathVariable String id,
+			@PathVariable String date) throws ParseException{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date dates = sdf.parse(date);
-		return teacherService.listStuAttendancea(dates);
+		return teacherService.listStuAttendancea(id, dates);
 	}
 	//班级
-	@GetMapping("/StuAttendanceb/{id}")
-	public List<StuAttendance> findByClaName(@PathVariable String id){
-		return teacherService.findByClaName(id);
+	@GetMapping("/{id}/stuattendanceb/{classId}")
+	public List<StuAttendance> findByClaName(
+			@PathVariable String id,
+			@PathVariable String classId){
+		return teacherService.findByClassId(id, classId);
 	}
 	
 	
 	//添加考勤信息
-	@PostMapping("/saveStuAttendance")
-	public Map<String, Object> saveStuAttendance(@RequestBody StuAttendance stua) {		
+	@PostMapping("/{id}/stuattendance")
+	public Map<String, Object> saveStuAttendance(
+			@PathVariable String id,
+			@RequestBody StuAttendance stua) {		
 		return teacherService.saveStuAttendance(stua);
 	}
 	
 	//修改考勤信息
-	@PutMapping("/updateStuAttendance")
+	@PutMapping("/{id}/stuattendance")
 	public Map<String, Object> updateStuAttendance(
+			@PathVariable String id,
 			@RequestBody StuAttendance stua
 			) {
 		return teacherService.updateStuAttendance(stua);
 	}
 	
 	//学生成绩录入
-	@PostMapping("/saveScore")
+	@PostMapping("/{id}/score")
 	public Map<String, Object> saveScore(
+			@PathVariable String id,
 			@RequestBody Score score
 			) {
 		
@@ -118,8 +128,9 @@ public class TeacherController {
 	}
 	
 	//学生成绩修改
-	@PutMapping("/updateScore")
+	@PutMapping("/{id}/score")
 	public Map<String, Object> updateScore(
+			@PathVariable String id,
 			@RequestBody Score score
 			) {
 		return teacherService.saveScore(score);

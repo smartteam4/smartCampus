@@ -37,11 +37,11 @@ public interface TeacherService {
 	Teacher loadTeacher (String id);
 	//通过指定班级/学号/日期等查看学生考勤信息 ?
 	//学号
-	List<StuAttendance> listStuAttendance(String id);
+	List<StuAttendance> listStuAttendance(String tchId, String stuId);
 	//日期
-	List<StuAttendance> listStuAttendancea(Date date);
+	List<StuAttendance> listStuAttendancea(String tchId, Date date);
 	//班级
-	List<StuAttendance> findByClaName(String id);
+	List<StuAttendance> findByClassId(String tchId, String classId);
 	//学生考勤信息添加（仅添加缺勤信息）
 	Map<String, Object> saveStuAttendance(StuAttendance stua);
 	//学生考勤信息修改

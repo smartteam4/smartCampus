@@ -110,28 +110,63 @@ public class TeacherServiceImpl implements TeacherService {
 	 * 通过指定班级/学号/日期等查看学生考勤信息 ?
 	 */
 	@Override
-	public List<StuAttendance> listStuAttendance(String id) {
-		
-		return stuAttendanceRepository.listStuAttendance(id);
+	public List<StuAttendance> listStuAttendance(String tchId, String stuIds) {
+		// 通过教师id获得课表集合
+		List<Curriculum> cList = getByTchId(tchId);
+		// 声明一个学生考勤集合
+		List<StuAttendance> stuAttList = new ArrayList<>();
+		for (Curriculum c : cList) {
+			stuAttList.addAll(stuAttendanceRepository.listStuAttendance(c.getId(), stuIds));
+		}
+		return stuAttList;
 	}
+	
 	//日期
 	@Override
-	public List<StuAttendance> listStuAttendancea(Date date) {
-		
-		return stuAttendanceRepository.findByDate(date);
+	public List<StuAttendance> listStuAttendancea(String tchId, Date date) {
+		// 通过教师id获得课表集合
+		List<Curriculum> cList = getByTchId(tchId);
+		// 声明一个学生考勤集合
+		List<StuAttendance> stuAttList = new ArrayList<>();
+		for (Curriculum c : cList) {
+			stuAttList.addAll(stuAttendanceRepository.findByDate(c.getId(), date));
+		}
+		return stuAttList;
 	}
+	
 	//班级
 	@Override
-	public List<StuAttendance> findByClaName(String id) {
-		List<StuAttendance> list = new ArrayList<>();
-		List<ClassRelation> classlist = classRelationRepository.findByName(id);
-		System.out.println(classlist);
-		
-		for (int i = 0; i < classlist.size(); i++) {
-			list.addAll(stuAttendanceRepository.findByClaName(classlist.get(i).getId()));
+	public List<StuAttendance> findByClassId(String tchId, String classId) {
+		// 通过教师id获得课表集合
+		List<Curriculum> cList = getByTchId(tchId);
+		// 声明一个学生考勤集合
+		List<StuAttendance> stuAttList = new ArrayList<>();
+		List<ClassRelation> relations = classRelationRepository.findByClasses(classId);
+		// 通过教室id获得班级关系对象id
+		ClassRelation classRelation = relations.size() > 0 ? relations.get(0): null;
+		if (classRelation != null) {
+			for (Curriculum c : cList) {
+				stuAttList.addAll(stuAttendanceRepository.findByClass(c.getId(), classRelation.getId()));
+			}
 		}
+		return stuAttList;
 		
-		return list;
+	}
+	
+	/**
+	 * 通过教师id查询课表
+	 * @param TchId
+	 * @return 课表对象
+	 */
+	public List<Curriculum> getByTchId(String tchId) {
+		// 通过教师id查询教授id
+		List<Teach> teachList = teachRepository.findByTeacher(new Teacher(tchId));
+		List<Curriculum> curriculumList = new ArrayList<>();
+		for (Teach t : teachList) {
+			// 通过教授id查询课表
+			curriculumList.addAll(curriculumRepository.findByTeach(t));
+		}
+		return curriculumList;
 	}
 
 	
@@ -196,11 +231,11 @@ public class TeacherServiceImpl implements TeacherService {
 		Map<String, Object> map = new HashMap<>();
 		if (scoreRepository.save(score) == null) {
 			map.put("code", 0); 
-			map.put("msg", "录入失败！");
+			map.put("msg", "更新失败！");
 					
 		} else {
 			map.put("code", 1);
-			map.put("msg", "录入成功！");
+			map.put("msg", "更新成功！");
 		}
 		return  map;
 	}
