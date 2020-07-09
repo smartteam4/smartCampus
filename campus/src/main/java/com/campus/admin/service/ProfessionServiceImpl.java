@@ -1,6 +1,8 @@
 package com.campus.admin.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,8 +31,16 @@ public class ProfessionServiceImpl implements ProfessionService {
 	}
 
 	@Override
-	public int saveProfession(Profession profession) {
-		return professionRepository.save(profession) == null ? 0 : 1;
+	public Map<String, Object> saveProfession(Profession profession) {
+		Map<String, Object> map = new HashMap<>();
+		if (professionRepository.save(profession) == null) {
+			map.put("code", 0);
+			map.put("msg", "保存失败！");
+		} else {
+			map.put("code", 1);
+			map.put("msg", "保存成功！");
+		}
+		return map;
 	}
 
 }

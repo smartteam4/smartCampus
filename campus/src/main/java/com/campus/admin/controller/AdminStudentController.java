@@ -2,6 +2,7 @@ package com.campus.admin.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,13 +46,13 @@ public class AdminStudentController {
 
 	// 修改学生信息
 	@PutMapping
-	public int updateStudent(@RequestBody Student student) {
+	public Map<String, Object> updateStudent(@RequestBody Student student) {
 		return adminService.updateStudent(student);
 	}
 
 	// 添加学生信息
 	@PostMapping
-	public int addStudent(@RequestBody Student student) {
+	public Map<String, Object> addStudent(@RequestBody Student student) {
 		return adminService.addStudent(student);
 	}
 }

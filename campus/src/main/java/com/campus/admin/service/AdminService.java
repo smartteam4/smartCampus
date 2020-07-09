@@ -1,6 +1,7 @@
 package com.campus.admin.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.campus.entity.Student;
 
@@ -20,8 +21,8 @@ public interface AdminService {
 	public Student loadStudent(String id);
 	
 	//修改学生信息
-	public int updateStudent(Student student);
+	public Map<String, Object> updateStudent(Student student);
 	
 	//添加学生信息
-	public int addStudent(Student student);
+	public Map<String, Object> addStudent(Student student);
 }

@@ -1,6 +1,8 @@
 package com.campus.admin.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,23 +38,33 @@ public class AdminServiceImpl implements AdminService{
 		//通过id获得学生信息
 		@Override
 		public Student loadStudent(String id) {
-			// TODO Auto-generated method stub
 			return studentRespository.getStudent(id);
 		}
 
 		//修改学生信息
 		@Override
-		public int updateStudent(Student student) {
-			// TODO Auto-generated method stub
-			studentRespository.save(student);
-			return 1;
+		public Map<String, Object> updateStudent(Student student) {
+			Map<String, Object> map = new HashMap<>();
+			if (studentRespository.save(student) == null) {
+				map.put("code", 0);
+				map.put("msg", "修改失败！");
+			} else {
+				map.put("code", 1);
+				map.put("msg", "修改成功！");
+			}
+			return map;
 		}
+		
 		//添加学生信息
 		@Override
-		public int addStudent(Student student) {
-			// TODO Auto-generated method stub
-			studentRespository.save(student);
-			return 1;
+		public Map<String, Object> addStudent(Student student) {Map<String, Object> map = new HashMap<>();
+			if (studentRespository.save(student) == null) {
+				map.put("code", 0);
+				map.put("msg", "添加失败！");
+			} else {
+				map.put("code", 1);
+				map.put("msg", "添加成功！");
+			}
+			return map;
 		}
-
 }

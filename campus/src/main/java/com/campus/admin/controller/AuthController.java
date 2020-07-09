@@ -1,5 +1,7 @@
 package com.campus.admin.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +27,7 @@ public class AuthController {
 	AuthService authService;
 
 	@PostMapping
-	public int save(@RequestBody Auth auth) {
+	public Map<String, Object> save(@RequestBody Auth auth) {
 		return authService.save(auth);
 	}
 	

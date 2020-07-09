@@ -1,12 +1,10 @@
 package com.campus.teacher.service;
 
 import java.util.List;
-
-import org.springframework.data.jdbc.repository.query.Query;
+import java.util.Map;
 
 import com.campus.entity.Curriculum;
 import com.campus.entity.StuQuality;
-import com.campus.entity.Teach;
 
 public interface TeacherService {
 	/**
@@ -14,7 +12,7 @@ public interface TeacherService {
 	 * @param sq 学生素质对象
 	 * @return 1或0
 	 */
-	int saveStuquality(StuQuality sq);  
+	Map<String, Object> saveStuquality(StuQuality sq);  
 	/**
 	 * 教师查询自己的授课信息
 	 * @param id	教师id
@@ -28,7 +26,7 @@ public interface TeacherService {
 	 * @param pwd	密码
 	 * @return 返回1或0
 	 */
-	int updetePassword(String id, String pwd);
+	Map<String, Object> updetePassword(String id, String pwd);
 	
 	
 }
