@@ -1,6 +1,9 @@
 package com.campus.repository;
 
+import java.util.List;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.campus.entity.Bulletin;
@@ -14,5 +17,8 @@ import com.campus.entity.Bulletin;
  */
 @Repository
 public interface BulletinRepository extends MongoRepository<Bulletin, String> {
-
+	
+	@Query(value = "{'title': {'$regex': ?0}}")
+	List<Bulletin> fas(String tit);
+	
 }

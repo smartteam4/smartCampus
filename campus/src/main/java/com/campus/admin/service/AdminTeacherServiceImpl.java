@@ -1,4 +1,4 @@
-package com.campus.admin.serice;
+package com.campus.admin.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ public class AdminTeacherServiceImpl implements AdminTeacherService {
 	
 	@Override
 	public Map<String, Object> saveTeacher(Teacher teacher) {
-		if (MAX_ID==0) {
+		if (MAX_ID == null) {
 			cha();
 		}
 		teacher.setId((++MAX_ID).toString());

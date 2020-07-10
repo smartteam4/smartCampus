@@ -18,13 +18,6 @@ import com.campus.entity.ClassRelation;
 @Repository
 public interface ClassRelationRepository extends MongoRepository<ClassRelation, String> {
 	
-	//根据学院id，专业id，班级id得到班级关系对象
-	@Query(value = "{'college.id':?0,'profession.id':?1,'classes.id':?2}")
-	ClassRelation getClassRelationls(String collegeid,String professionid,String classesid);
-	
-	@Query(value = "{'_id':?0}")
-	List<ClassRelation> findByIds(String id);
-	
 	/**
 	 * 
 	 * @Title: getProfessionByCollegeId
@@ -73,4 +66,33 @@ public interface ClassRelationRepository extends MongoRepository<ClassRelation, 
 	 */
 	@Query(value = "{'classes.id': ?0}")
 	List<ClassRelation> findByClasses(String classesId);
+	
+	/**
+	 * 通过班级id查询班级关系对象
+	 * @param classes
+	 * @return
+	 */
+	@Query(value = "{ 'classes.id' : ?0 }")
+	List<ClassRelation> findByName(String id);
+	
+
+	//根据学院id，专业id，班级id得到班级关系对象
+	@Query(value = "{'college.id':?0,'profession.id':?1,'classes.id':?2}")
+	ClassRelation getClassRelationls(String collegeid,String professionid,String classesid);
+	
+	@Query(value = "{'_id':?0}")
+	List<ClassRelation> findByIds(String id);
+	
+	//根据学院、专业、班级得到班级关系对象
+	@Query(value = "{'college.id':?0,'profession.id':?1,'classes.id':?2}")
+	ClassRelation getRelation(String college,String profession,String classes);
+	
+	//根据学院
+	@Query(value = "{'college.id':?0}")
+	List<ClassRelation> getClassRelationByCollege(String collegeid);
+	
+	//根据专业
+	@Query(value = "{'profession.id':?0}")
+	List<ClassRelation> getClassRelationByPro(String id);
+	
 }

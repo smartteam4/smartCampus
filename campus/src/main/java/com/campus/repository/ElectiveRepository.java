@@ -1,5 +1,7 @@
 package com.campus.repository;
 
+import java.util.List;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -19,4 +21,7 @@ public interface ElectiveRepository extends MongoRepository<Elective, String> {
 	//根据id得到对象
 	@Query(value = "{'_id':?0}")
 	Elective getElective(String id);
+	
+	@Query(value = "{'schoolTerm': ?0, 'profession.id': ?1}")
+	List<Elective> findBySchoolTermAndProfessionId(String schoolTerm, String pId);
 }

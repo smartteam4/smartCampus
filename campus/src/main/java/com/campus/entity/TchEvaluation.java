@@ -23,6 +23,7 @@ public class TchEvaluation {
 	/**
 	 * 学生对象
 	 */
+	@DBRef
 	private Student student;
 	/**
 	 * 教师对象
