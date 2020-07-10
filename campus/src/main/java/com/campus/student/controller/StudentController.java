@@ -3,6 +3,8 @@ package com.campus.student.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.collections4.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.campus.entity.Curriculum;
 import com.campus.entity.Elective;
+import com.campus.entity.ReleaseHomework;
 import com.campus.entity.Score;
 import com.campus.entity.Student;
 import com.campus.entity.TchEvaluation;
@@ -62,10 +66,10 @@ public class StudentController {
 	}
 	//学生选课
 	@PostMapping("/{id}/elective")
-	public Map<String, Object> stuElective(@PathVariable String id,@RequestParam Elective elective) {
+	public Map<String, Object> stuElective(@PathVariable String id,@RequestParam String idd) {
 		Student student=new Student();
 		student.setId(id);
-		int i= studentService.stuEle(student, elective);
+		int i= studentService.stuEle(student,idd);
 		Map<String, Object>map=new HashedMap<>();
 		map.put("code", i);
 		return map;
@@ -81,4 +85,21 @@ public class StudentController {
 		return map;
 	}
 	
+	//学生提交作业
+	@PostMapping("/homework")
+	public Map<String, Object>upHomework(@RequestParam(name = "file") MultipartFile multipartFile,@RequestParam String id,@RequestParam String filename){
+		return studentService.upHomeWork(multipartFile, id, filename);
+	}
+	
+	//显示所有作业
+	@GetMapping("/gethomework")
+	public List<ReleaseHomework>listReleaseHomeworks(@RequestParam String id){
+		return studentService.listReleaseHomeworks(id);
+	}
+	
+	//下载作业
+	@GetMapping("/downhomework")
+	public void downHomeWork(@RequestParam(name = "u")String pathname,@RequestParam(name = "n")String filename) {
+		studentService.downHomeWork(pathname, filename);
+	}
 }

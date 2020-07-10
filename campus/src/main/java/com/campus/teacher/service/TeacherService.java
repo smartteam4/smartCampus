@@ -1,7 +1,10 @@
 package com.campus.teacher.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.campus.entity.Curriculum;
 import com.campus.entity.StuQuality;
@@ -29,4 +32,12 @@ public interface TeacherService {
 	Map<String, Object> updetePassword(String id, String pwd);
 	
 	
+	/**
+	 * 
+	 * @param multipartFile   文件
+	 * @param id    教师id
+	 * @param filename    文件名
+	 * @return
+	 */
+	Map<String, Object> upFiles(MultipartFile multipartFile,String id,String classesid,String filename,Date day);
 }

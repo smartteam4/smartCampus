@@ -1,29 +1,39 @@
 package com.campus.student.service;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.campus.config.FileMongo;
 import com.campus.entity.Auth;
 import com.campus.entity.ClassRelation;
 import com.campus.entity.Course;
 import com.campus.entity.Curriculum;
 import com.campus.entity.Elective;
+import com.campus.entity.ReleaseHomework;
 import com.campus.entity.Score;
 import com.campus.entity.StuElective;
 import com.campus.entity.Student;
+import com.campus.entity.SubmitHomework;
 import com.campus.entity.TchEvaluation;
 import com.campus.entity.Teacher;
 import com.campus.entity.User;
 import com.campus.repository.AuthRepository;
+import com.campus.repository.ClassRelationRepository;
 import com.campus.repository.CurriculumRepository;
 import com.campus.repository.ElectiveRepository;
 import com.campus.repository.LessonPlanRepository;
+import com.campus.repository.ReleaseHomeworkRepository;
 import com.campus.repository.ScoreRepository;
 import com.campus.repository.StuElectiveRepostory;
 import com.campus.repository.StudentRepository;
+import com.campus.repository.SubmitHomeworkRepository;
 import com.campus.repository.TchEvaluationRepository;
 import com.campus.repository.TeachRepository;
 import com.campus.repository.UserRepository;
@@ -51,6 +61,14 @@ public class StudentServiceImpl implements StudentService {
 	StuElectiveRepostory stuElectiveRepostory;
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	SubmitHomeworkRepository submitHomeWorkRepository;
+	@Autowired
+	FileMongo filemongo;
+	@Autowired
+	ClassRelationRepository classRelationRepository;
+	@Autowired
+	ReleaseHomeworkRepository releaseHomeworkRepository;
 	
 	//取得所有学生信息
 	@Override
@@ -120,14 +138,14 @@ public class StudentServiceImpl implements StudentService {
 	}
 	//学生选课
 	@Override
-	public int stuEle(Student student, Elective elective) {
+	public int stuEle(Student student, String id) {
 		// TODO Auto-generated method stub
 		//判断选课开关
 		Auth auth=authRepository.findAll().get(0);
 		//得到选课
-		Elective ele=electiveRepository.getElective(elective.getId());
+		Elective ele=electiveRepository.getElective(id);
 		if(auth.getElective()&&ele.getStatus()) {
-			elective.setSelectedNumber(ele.getSelectedNumber()+1);
+			ele.setSelectedNumber(ele.getSelectedNumber()+1);
 			if(ele.getSelectedNumber()+1==20) {
 				ele.setStatus(false);
 			}
@@ -140,6 +158,39 @@ public class StudentServiceImpl implements StudentService {
 		}else {
 			return 0;
 		}
+	}
+	//学生提交作业
+	@Override
+	public Map<String, Object> upHomeWork(MultipartFile multipartFile,String id, String filename) {
+		// TODO Auto-generated method stub
+		SubmitHomework submitHomework=new SubmitHomework();
+		Student student=studentRespository.getStudent(id);
+		submitHomework.setDocument(filename);
+		submitHomework.setStudent(student);
+		submitHomework.setSubmitDate(new Date());
+		int i=submitHomeWorkRepository.save(submitHomework)==null?0:1;
+		if(i==1) {
+			filemongo.upFiles(multipartFile, filename);
+		}else {
+			i=0;
+		}
+		HashMap<String, Object>map=new HashMap<>();
+		map.put("code", i);
+		return map;
+	}
+	//显示所有作业
+	@Override
+	public List<ReleaseHomework> listReleaseHomeworks(String id) {
+		// TODO Auto-generated method stub
+		ClassRelation classRelation=studentRespository.getStudent(id).getClassRelation();
+		List<ReleaseHomework>list=releaseHomeworkRepository.listReleaseHomeworks(classRelation.getId());
+		return list;
+	}
+	//下载教师的作业
+	@Override
+	public void downHomeWork(String pathname, String filename) {
+		// TODO Auto-generated method stub
+		filemongo.getFiles(filename, pathname);
 	}
 
 	

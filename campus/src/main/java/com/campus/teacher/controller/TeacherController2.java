@@ -1,5 +1,6 @@
 package com.campus.teacher.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.campus.entity.Curriculum;
 import com.campus.entity.StuQuality;
@@ -60,4 +63,20 @@ public class TeacherController2 {
 		return teacherService.updetePassword(id, map.get("pwd"));
 	}
 	
+	/**
+	 * 教师上传作业
+	 * @param multipartFile 文件
+	 * @param releaseHomework 作业对象
+	 * @return
+	 */
+	@PostMapping("/homework")
+	public Map<String, Object> upFiles(@RequestParam(name = "file") MultipartFile multipartFile,
+			@RequestParam String id,
+			@RequestParam String classesid,
+			@RequestParam String filename,
+			@RequestParam Date day
+			){
+		return teacherService.upFiles(multipartFile, id, classesid, filename,day);
+	}
+
 }

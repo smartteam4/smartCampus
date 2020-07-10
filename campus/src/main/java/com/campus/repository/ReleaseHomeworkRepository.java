@@ -1,6 +1,9 @@
 package com.campus.repository;
 
+import java.util.List;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.campus.entity.ReleaseHomework;
@@ -15,4 +18,6 @@ import com.campus.entity.ReleaseHomework;
 @Repository
 public interface ReleaseHomeworkRepository extends MongoRepository<ReleaseHomework, String> {
 
+	@Query(value = "{'classRelation.id':?0}")
+	List<ReleaseHomework> listReleaseHomeworks(String id);
 }

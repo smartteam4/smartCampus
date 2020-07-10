@@ -1,9 +1,12 @@
 package com.campus.student.service;
 
 import java.util.List;
+import java.util.Map;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.campus.entity.Curriculum;
-import com.campus.entity.Elective;
+import com.campus.entity.ReleaseHomework;
 import com.campus.entity.Score;
 import com.campus.entity.Student;
 import com.campus.entity.TchEvaluation;
@@ -23,7 +26,13 @@ public interface StudentService{
 	//根据教师id来对教师进行评分和评价
 	public int evaluate(TchEvaluation tchEvaluation);
 	//学生选课操作
-	public int stuEle(Student student,Elective elective);
+	public int stuEle(Student student,String id);
 	//学生更改自身密码
 	public int updatePassword(String username,String oldpwd,String newpwd);
+	//学生提交作业
+	public Map<String, Object>upHomeWork(MultipartFile multipartFile,String id,String filename);
+	//显示所有作业
+	public List<ReleaseHomework>listReleaseHomeworks(String id);
+	//下载教师布置的作业
+	public void downHomeWork(String pathname,String filename);
 }

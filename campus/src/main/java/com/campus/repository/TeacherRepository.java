@@ -1,6 +1,7 @@
 package com.campus.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.campus.entity.Teacher;
@@ -14,5 +15,7 @@ import com.campus.entity.Teacher;
  */
 @Repository
 public interface TeacherRepository extends MongoRepository<Teacher, String> {
-
+	
+	@Query(value = "{'_id':?0}")
+	Teacher findByIds(String id);
 }
