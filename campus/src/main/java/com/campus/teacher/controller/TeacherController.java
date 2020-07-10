@@ -43,6 +43,7 @@ public class TeacherController {
 		Teacher tc = new Teacher();
 		tc.setId(id);
 		sq.setTeacher(tc);
+		System.out.println(sq);
 		return teacherService.saveStuquality(sq);
 	}
 	/**
@@ -123,7 +124,6 @@ public class TeacherController {
 			@PathVariable String id,
 			@RequestBody Score score
 			) {
-		
 		return teacherService.saveScore(score);
 	}
 	
@@ -135,6 +135,5 @@ public class TeacherController {
 			) {
 		return teacherService.saveScore(score);
 	}
-	
 	
 }

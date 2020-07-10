@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections4.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,18 +47,12 @@ public class AdminStudentController {
 	// 修改学生信息
 	@PutMapping
 	public Map<String, Object> updateStudent(@RequestBody Student student) {
-		int i=adminService.updateStudent(student);
-		Map<String, Object>map=new HashedMap<>();
-		map.put("code", i);
-		return map;
+		return adminService.updateStudent(student);
 	}
 
 	// 添加学生信息
 	@PostMapping
 	public Map<String, Object> addStudent(@RequestBody Student student) {
-		int i=adminService.addStudent(student);
-		Map<String, Object>map=new HashedMap<>();
-		map.put("code", i);
-		return map;
+		return adminService.addStudent(student);
 	}
 }

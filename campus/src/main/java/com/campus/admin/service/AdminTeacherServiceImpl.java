@@ -33,7 +33,7 @@ public class AdminTeacherServiceImpl implements AdminTeacherService {
 	
 	@Override
 	public Map<String, Object> saveTeacher(Teacher teacher) {
-		if (MAX_ID==0) {
+		if (MAX_ID == null) {
 			cha();
 		}
 		teacher.setId((++MAX_ID).toString());

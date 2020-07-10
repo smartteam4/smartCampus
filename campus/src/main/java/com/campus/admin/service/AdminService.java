@@ -29,10 +29,10 @@ public interface AdminService {
 	public Student loadStudent(String id);
 	
 	//修改学生信息
-	public int updateStudent(Student student);
+	public Map<String, Object> updateStudent(Student student);
 	
 	//添加学生信息
-	public int addStudent(Student student);
+	public Map<String, Object> addStudent(Student student);
 
 	//获得指定学期的全部教师评价
 	public List<TchEvaluation> listTchEvaluationByschoolTerm(String schoolterm);
@@ -50,26 +50,32 @@ public interface AdminService {
 	public List<StuAttendance> listStuAttendance(Date date, StuAttendance stuAttendance);
 	
 	//学生考勤信息修改
-	public int updateStuAttendanceByStuAttendeance(StuAttendance stuAttendance);
+	public Map<String, Object> updateStuAttendanceByStuAttendeance(StuAttendance stuAttendance);
 	
 	//通过指定学期、学院、专业和班级查找课表
 	public List<Curriculum> listCurriculum(Curriculum curriculum);
+	
+	//通过指定学期、学院、专业和班级查找课表
+	public List<Elective> listElective(Elective elective);
 
 	//保存课表信息
-	public int saveCurriculumByCurriculum(Curriculum curriculum);
+	public Map<String, Object> saveCurriculumByCurriculum(Curriculum curriculum);
 
 	//修改课表信息
-	public int updateCurriculumByCurriculum(Curriculum curriculum);
+	public Map<String, Object> updateCurriculumByCurriculum(Curriculum curriculum);
 
+	//保存选课信息
+	public Map<String, Object> saveElective(Elective elective);
+	
 	//修改选课信息
-	public int updateElectiveByElective(Elective elective);
+	public Map<String, Object> updateElectiveByElective(Elective elective);
 
 	//通过指定学期、学院、专业和班级查找课程计划
 	public List<LessonPlan> listLessonPlan(LessonPlan lessonPlan);
 
 	//保存课程计划
-	public int saveLessonPlanByLessonPlan(LessonPlan lessonPlan);
+	public Map<String, Object> saveLessonPlanByLessonPlan(LessonPlan lessonPlan);
 
 	//修改课程计划
-	public int updateLessonPlanByLessonPlan(LessonPlan lessonPlan);
+	public Map<String, Object> updateLessonPlanByLessonPlan(LessonPlan lessonPlan);
 }

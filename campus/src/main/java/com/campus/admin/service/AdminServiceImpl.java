@@ -40,11 +40,11 @@ public class AdminServiceImpl implements AdminService{
 	@Autowired
 	StuQualityRepository stuQualityRepository;
 	@Autowired
-	CurriculumRepository CurriculumRepository;
+	CurriculumRepository curriculumRepository;
 	@Autowired
-	ElectiveRepository ElectiveRepository;
+	ElectiveRepository electiveRepository;
 	@Autowired
-	LessonPlanRepository LessonPlanRepository;
+	LessonPlanRepository lessonPlanRepository;
 	@Autowired
 	TeacherRepository teacherRepository;
 	
@@ -70,15 +70,21 @@ public class AdminServiceImpl implements AdminService{
 
 		//修改学生信息
 		@Override
-		public int updateStudent(Student student) {
+		public Map<String, Object> updateStudent(Student student) {
 			studentRespository.save(student);
-			return 1;
+			Map<String, Object> map = new HashMap<>();
+			map.put("code", 1);
+			map.put("msg","修改成功！");
+			return map;
 		}
 		//添加学生信息
 		@Override
-		public int addStudent(Student student) {
+		public Map<String, Object> addStudent(Student student) {
 			studentRespository.save(student);
-			return 1;
+			Map<String, Object> map = new HashMap<>();
+			map.put("code", 1);
+			map.put("msg","保存成功！");
+			return map;
 		}
 		//获得指定学期的全部教师评价
 		@Override
@@ -132,62 +138,110 @@ public class AdminServiceImpl implements AdminService{
 
 		//学生考勤信息修改
 		@Override
-		public int updateStuAttendanceByStuAttendeance(StuAttendance stuAttendance) {
+		public Map<String, Object> updateStuAttendanceByStuAttendeance(StuAttendance stuAttendance) {
 			stuAttendanceRepository.save(stuAttendance);
-			return 1;
-//			return new ResponseEntity<String>("修改成功",HttpStatus.OK);
+			Map<String, Object> map = new HashMap<>();
+			map.put("code", 1);
+			map.put("msg","修改成功！");
+			return map;
 		}
 
 		//保存课表信息
 		@Override
-		public int saveCurriculumByCurriculum(Curriculum curriculum) {
-			CurriculumRepository.save(curriculum);
-			return 1;
-			 
+		public Map<String, Object> saveCurriculumByCurriculum(Curriculum curriculum) {
+			curriculumRepository.save(curriculum);
+			Map<String, Object> map = new HashMap<>();
+			map.put("code", 1);
+			map.put("msg","保存成功！");
+			return map;
 		}
 
 		//修改课表信息
 		@Override
-		public int updateCurriculumByCurriculum(Curriculum curriculum) {
-			CurriculumRepository.findById(curriculum.getId()).get();
-			CurriculumRepository.save(curriculum);
-			return 1;
+		public Map<String, Object> updateCurriculumByCurriculum(Curriculum curriculum) {
+			curriculumRepository.findById(curriculum.getId()).get();
+			curriculumRepository.save(curriculum);
+			Map<String, Object> map = new HashMap<>();
+			map.put("code", 1);
+			map.put("msg","修改成功！");
+			return map;
 		}
 
 		//修改选课信息
 		@Override
-		public int updateElectiveByElective(Elective elective) {
-			ElectiveRepository.findById(elective.getId()).get();
-			ElectiveRepository.save(elective);
-			return 1;
+		public Map<String, Object> updateElectiveByElective(Elective elective) {
+			electiveRepository.findById(elective.getId()).get();
+			electiveRepository.save(elective);
+			Map<String, Object> map = new HashMap<>();
+			map.put("code", 1);
+			map.put("msg","修改成功！");
+			return map;
 		}
 
 		//通过指定学期和班级关系对象(指定学院专业和班级)查找课表
 		@Override
 		public List<Curriculum> listCurriculum(Curriculum curriculum) {
-			return null;
+			if (curriculum == null ||
+					curriculum.getSchoolTerm() == null ||
+					curriculum.getClassRelation() == null) {
+				return null;
+			}
+			return curriculumRepository.findBySchoolTermAndClassRelationId(curriculum.getSchoolTerm(),
+					curriculum.getClassRelation().getId());
 		}
 
 
 		//通过指定学期、学院、专业和班级查找课程计划
 		@Override
 		public List<LessonPlan> listLessonPlan(LessonPlan lessonPlan) {
-			return null;
+			if (lessonPlan == null ||
+					lessonPlan.getSchoolTerm() == null ||
+					lessonPlan.getClassRelation() == null) {
+				return null;
+			}
+			return lessonPlanRepository.findBySchoolTermAndClassRelationId(lessonPlan.getSchoolTerm(),
+					lessonPlan.getClassRelation().getId());
 		}
 
 		//保存课程计划
 		@Override
-		public int saveLessonPlanByLessonPlan(LessonPlan lessonPlan) {
-			LessonPlanRepository.save(lessonPlan);
-			return 1;
+		public Map<String, Object> saveLessonPlanByLessonPlan(LessonPlan lessonPlan) {
+			lessonPlanRepository.save(lessonPlan);
+			Map<String, Object> map = new HashMap<>();
+			map.put("code", 1);
+			map.put("msg","保存成功！");
+			return map;
 		}
 
 		//修改课程计划
 		@Override
-		public int updateLessonPlanByLessonPlan(LessonPlan lessonPlan) {
-			LessonPlanRepository.findById(lessonPlan.getId()).get();
-			LessonPlanRepository.save(lessonPlan);
-			return 1;
+		public Map<String, Object> updateLessonPlanByLessonPlan(LessonPlan lessonPlan) {
+			lessonPlanRepository.findById(lessonPlan.getId()).get();
+			lessonPlanRepository.save(lessonPlan);
+			Map<String, Object> map = new HashMap<>();
+			map.put("code", 1);
+			map.put("msg","修改成功！");
+			return map;
+		}
+
+		@Override
+		public List<Elective> listElective(Elective elective) {
+			if (elective == null ||
+					elective.getSchoolTerm() == null ||
+					elective.getProfession() == null) {
+				return null;
+			}
+			return electiveRepository.findBySchoolTermAndProfessionId(elective.getSchoolTerm(),
+					elective.getProfession().getId());
+		}
+
+		@Override
+		public Map<String, Object> saveElective(Elective elective) {
+			electiveRepository.save(elective);
+			Map<String, Object> map = new HashMap<>();
+			map.put("code", 1);
+			map.put("msg","保存成功！");
+			return map;
 		}
 
 }

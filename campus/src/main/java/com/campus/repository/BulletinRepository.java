@@ -17,8 +17,8 @@ import com.campus.entity.Bulletin;
  */
 @Repository
 public interface BulletinRepository extends MongoRepository<Bulletin, String> {
-
-@Query(value = "{'title': {'$regex': ?0}}",
-          fields = "{title:1}")
-List<Bulletin> fas(String tit);
+	
+	@Query(value = "{'title': {'$regex': ?0}}")
+	List<Bulletin> fas(String tit);
+	
 }

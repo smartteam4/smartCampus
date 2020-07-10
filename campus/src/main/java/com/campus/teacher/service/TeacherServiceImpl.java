@@ -48,6 +48,7 @@ public class TeacherServiceImpl implements TeacherService {
 	ScoreRepository scoreRepository;
 	@Autowired
 	ClassRelationRepository classRelationRepository;
+	@Autowired
 	AuthService authService;
 
 	@Override

@@ -51,8 +51,8 @@ public class AdminController {
 	//获得指定学期的全部教师评价--ok
 	@GetMapping("/tchevaluation/{schoolTerm}")
 	public List<TchEvaluation> listTchEvaluationByschoolTerm(
-			@PathVariable String schoolterm) {
-		return adminService.listTchEvaluationByschoolTerm(schoolterm);
+			@PathVariable String schoolTerm) {
+		return adminService.listTchEvaluationByschoolTerm(schoolTerm);
 	}
 
 	//获得指定职工号的全部教师评价--ok
@@ -80,74 +80,73 @@ public class AdminController {
 		return adminService.listStuQualitiesByStudent(college, profession, classes);		
 	}
 	
-	//通过指定班级、学号、日期等查看学生考勤信息 ???
-	@GetMapping("/stuattendance/{date}")
+	//通过指定班级、学号、日期等查看学生考勤信息 ok
+	@GetMapping("/stuattendance")
 	public List<StuAttendance> listStuAttendanceByStudentAndDate(
-			@PathVariable(required = false) String date,
+			@RequestParam(required = false) String date,
 			@RequestBody(required = false) StuAttendance stuAttendance) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		return adminService.listStuAttendance(sdf.parse(date), stuAttendance);
+		return adminService.listStuAttendance(date != null ? sdf.parse(date) : null, stuAttendance);
 		
 	}
 	
-	//通过指定学期、班级关系id（学院、专业、班级）查找课表 ???
+	//通过指定学期、班级关系id（学院、专业、班级）查找课表 ok
 	@GetMapping("/curriculum")
-	public List<Curriculum> loadCurriculumByschoolTermAndClassRelation(
-			@PathVariable(required = false) String date,
-			@RequestBody(required = false) Curriculum curriculum) throws ParseException {
+	public List<Curriculum> loadCurriculumByschoolTermAndClassRelation(@RequestBody Curriculum curriculum) {
 		return adminService.listCurriculum(curriculum);
 	}
 
-	//通过指定学期、学院、专业和班级查找课程计划  ???
+	//通过指定学期、学院、专业和班级查找课程计划  ok
 	@GetMapping("/lessonplan")
 	public List<LessonPlan> listLessonPlanByLessonPlans(@RequestBody LessonPlan lessonPlan){
 		return adminService.listLessonPlan(lessonPlan);
 	}
+	
+	//通过指定学期和专业查找选课表 ok
+	@GetMapping("/elective")
+	public List<Elective> listElective(@RequestBody Elective elective){
+		return adminService.listElective(elective);
+	}
 		
 	//学生考勤信息修改  ???
-	@PutMapping("/stuattendance/{stuAttendance}")
-	public int updateStuAttendanceByStuAttendeance(
-			@RequestBody StuAttendance stuAttendance) {
+	@PutMapping("/stuattendance")
+	public Map<String, Object> updateStuAttendanceByStuAttendeance(@RequestBody StuAttendance stuAttendance) {
 		return adminService.updateStuAttendanceByStuAttendeance(stuAttendance);
 	}
 	
 	//保存课表信息  ???
 	@PostMapping("/curriculum")
-	public int saveCurriculumByCurriculum(
-			@RequestBody Curriculum curriculum) {
-				return adminService.saveCurriculumByCurriculum(curriculum);
+	public Map<String, Object> saveCurriculumByCurriculum(@RequestBody Curriculum curriculum) {
+		return adminService.saveCurriculumByCurriculum(curriculum);
 	}
 
-
 	//修改课表信息  ???
-	@PutMapping("/curriculum/{curriculum}")
-	public int updateCurriculumByCurriculum(
-			@RequestBody Curriculum curriculum) {
-			
+	@PutMapping("/curriculum")
+	public Map<String, Object> updateCurriculumByCurriculum(@RequestBody Curriculum curriculum) {
 		return adminService.updateCurriculumByCurriculum(curriculum);
-		
+	}
+	
+	// 保存选课信息
+	@PostMapping("/elective")
+	public Map<String, Object> saveElective(@RequestBody Elective elective) {
+		return adminService.saveElective(elective);
 	}
 
 	//修改选课信息  ???
 	@PutMapping("/elective")
-	public int updateElectiveByElective(
-			@RequestBody Elective elective) {
+	public Map<String, Object> updateElectiveByElective(@RequestBody Elective elective) {
 		return adminService.updateElectiveByElective(elective);
-		
 	}
 
 	//保存课程计划  ???
 	@PostMapping("/lessonplan")
-	public int saveLessonPlanByLessonPlan(
-			@RequestBody LessonPlan lessonPlan) {
+	public Map<String, Object> saveLessonPlanByLessonPlan(@RequestBody LessonPlan lessonPlan) {
 		return adminService.saveLessonPlanByLessonPlan(lessonPlan);
-		
 	}
 
 	//修改课程计划  ???
 	@PutMapping("/lessonplan")
-	public int updateLessonPlanByLessonPlan(
-			@RequestBody LessonPlan lessonPlan) {
+	public Map<String, Object> updateLessonPlanByLessonPlan(@RequestBody LessonPlan lessonPlan) {
 		return adminService.updateLessonPlanByLessonPlan(lessonPlan);
 	}
 
